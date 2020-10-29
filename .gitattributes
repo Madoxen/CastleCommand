@@ -1,0 +1,10 @@
+#force merge tools
+*.meta -text -merge=unityamlmerge
+*.unity -text -merge=unityamlmerge
+*.asset -text -merge=unityamlmerge
+*.prefab -text -merge=unityamlmerge
+
+#prevent git from merging those
+*.unity binary
+*.prefab binary
+*.asset binary
