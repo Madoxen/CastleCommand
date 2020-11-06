@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System;
 
 namespace Assets
 {
     public class BuildingGhost : MonoBehaviour
     {
-        bool IsValid
+        public bool IsValid
         {
             get { return isValid; }
-            set
+            private set
             {
                 isValid = value;
                 if (isValid == true)
@@ -22,12 +23,12 @@ namespace Assets
                 }
             }
         }
-        bool isValid = true;
+        private bool isValid = true;
 
 
 
-        int collisionCount = 0;
-        int CollisionCount
+        private int collisionCount = 0;
+        private int CollisionCount
         {
             get { return collisionCount; }
             set
@@ -38,10 +39,10 @@ namespace Assets
         }
 
         [SerializeField]
-        Material ghostMat;
-        MasterInput input;
-        MeshRenderer Renderer;
-        int mask;
+        private Material ghostMat;
+        private MasterInput input;
+        private MeshRenderer Renderer;
+        private int mask;
 
         private void Awake()
         {
@@ -49,11 +50,13 @@ namespace Assets
             input = new MasterInput();
             Renderer = GetComponent<MeshRenderer>();
             Renderer.material = ghostMat;
-            input.Player.Mouse.performed += GhostMoved_performed;
+            input.Builder.MouseMove.performed += OnMouseMovePerformed;
         }
 
-        private void GhostMoved_performed(InputAction.CallbackContext context)
+
+        private void OnMouseMovePerformed(InputAction.CallbackContext context)
         {
+            
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             //Raycast against the terrain
             //256 -> 10000000 8th bit
@@ -66,18 +69,17 @@ namespace Assets
             {
                 Debug.DrawRay(ray.origin,ray.direction,Color.black);
             }
-
         }
 
 
         private void OnEnable()
         {
-            input.Player.Mouse.Enable();
+            input.Builder.MouseMove.Enable();
         }
 
         private void OnDisable()
         {
-            input.Player.Mouse.Disable();
+            input.Builder.MouseMove.Disable(); 
         }
 
         void OnTriggerEnter(Collider other)

@@ -15,21 +15,13 @@ public class @MasterInput : IInputActionCollection, IDisposable
     ""name"": ""CastleCommand"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Camera"",
             ""id"": ""5934b125-033c-4237-b5fb-6519d08d38ef"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""fb4af523-97a2-4615-8475-ec1ce6103afa"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Mouse"",
-                    ""type"": ""Value"",
-                    ""id"": ""356c3384-bad5-434e-90b5-09e2f3ca2eae"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -165,17 +157,6 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Joystick"",
                     ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3cd2c581-e251-4e6b-9058-689ff2af44e8"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -686,6 +667,71 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Builder"",
+            ""id"": ""ccaa27b7-58bd-433d-b06c-548f186dd279"",
+            ""actions"": [
+                {
+                    ""name"": ""CancelBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1b5e3cc-eee1-4ef8-99fd-652e7a51307f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ConfirmBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""96865b99-e901-423b-92b1-f2b21992ca03"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""ca7cbc61-eeec-4a77-8904-8a3fa89aab2a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7ca4326c-8bfd-4b75-995c-6ea7b599fe27"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17f1b1a2-d646-45a8-89ce-961909f9f26b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ConfirmBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecd342ef-8169-4793-b7ca-2df104d6ecba"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MouseMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -751,10 +797,9 @@ public class @MasterInput : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -767,6 +812,11 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Builder
+        m_Builder = asset.FindActionMap("Builder", throwIfNotFound: true);
+        m_Builder_CancelBuild = m_Builder.FindAction("CancelBuild", throwIfNotFound: true);
+        m_Builder_ConfirmBuild = m_Builder.FindAction("ConfirmBuild", throwIfNotFound: true);
+        m_Builder_MouseMove = m_Builder.FindAction("MouseMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -813,46 +863,38 @@ public class @MasterInput : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Mouse;
-    public struct PlayerActions
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_Move;
+    public struct CameraActions
     {
         private @MasterInput m_Wrapper;
-        public PlayerActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public CameraActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Camera_Move;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Mouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
-                @Mouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
-                @Mouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
+                @Move.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
             }
-            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Mouse.started += instance.OnMouse;
-                @Mouse.performed += instance.OnMouse;
-                @Mouse.canceled += instance.OnMouse;
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public CameraActions @Camera => new CameraActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -958,6 +1000,55 @@ public class @MasterInput : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Builder
+    private readonly InputActionMap m_Builder;
+    private IBuilderActions m_BuilderActionsCallbackInterface;
+    private readonly InputAction m_Builder_CancelBuild;
+    private readonly InputAction m_Builder_ConfirmBuild;
+    private readonly InputAction m_Builder_MouseMove;
+    public struct BuilderActions
+    {
+        private @MasterInput m_Wrapper;
+        public BuilderActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CancelBuild => m_Wrapper.m_Builder_CancelBuild;
+        public InputAction @ConfirmBuild => m_Wrapper.m_Builder_ConfirmBuild;
+        public InputAction @MouseMove => m_Wrapper.m_Builder_MouseMove;
+        public InputActionMap Get() { return m_Wrapper.m_Builder; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuilderActions set) { return set.Get(); }
+        public void SetCallbacks(IBuilderActions instance)
+        {
+            if (m_Wrapper.m_BuilderActionsCallbackInterface != null)
+            {
+                @CancelBuild.started -= m_Wrapper.m_BuilderActionsCallbackInterface.OnCancelBuild;
+                @CancelBuild.performed -= m_Wrapper.m_BuilderActionsCallbackInterface.OnCancelBuild;
+                @CancelBuild.canceled -= m_Wrapper.m_BuilderActionsCallbackInterface.OnCancelBuild;
+                @ConfirmBuild.started -= m_Wrapper.m_BuilderActionsCallbackInterface.OnConfirmBuild;
+                @ConfirmBuild.performed -= m_Wrapper.m_BuilderActionsCallbackInterface.OnConfirmBuild;
+                @ConfirmBuild.canceled -= m_Wrapper.m_BuilderActionsCallbackInterface.OnConfirmBuild;
+                @MouseMove.started -= m_Wrapper.m_BuilderActionsCallbackInterface.OnMouseMove;
+                @MouseMove.performed -= m_Wrapper.m_BuilderActionsCallbackInterface.OnMouseMove;
+                @MouseMove.canceled -= m_Wrapper.m_BuilderActionsCallbackInterface.OnMouseMove;
+            }
+            m_Wrapper.m_BuilderActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CancelBuild.started += instance.OnCancelBuild;
+                @CancelBuild.performed += instance.OnCancelBuild;
+                @CancelBuild.canceled += instance.OnCancelBuild;
+                @ConfirmBuild.started += instance.OnConfirmBuild;
+                @ConfirmBuild.performed += instance.OnConfirmBuild;
+                @ConfirmBuild.canceled += instance.OnConfirmBuild;
+                @MouseMove.started += instance.OnMouseMove;
+                @MouseMove.performed += instance.OnMouseMove;
+                @MouseMove.canceled += instance.OnMouseMove;
+            }
+        }
+    }
+    public BuilderActions @Builder => new BuilderActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1003,10 +1094,9 @@ public class @MasterInput : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IPlayerActions
+    public interface ICameraActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnMouse(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1020,5 +1110,11 @@ public class @MasterInput : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IBuilderActions
+    {
+        void OnCancelBuild(InputAction.CallbackContext context);
+        void OnConfirmBuild(InputAction.CallbackContext context);
+        void OnMouseMove(InputAction.CallbackContext context);
     }
 }
