@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //Responsible for positioning and instantiating buildings
 //Also shows building ghost if a building is chosen
@@ -9,8 +10,7 @@ public class Builder : MonoBehaviour
     [SerializeField]
     GameObject currentBuildingPrefab;
     [SerializeField]
-    GameObject buildingGhostObject; 
-
+    GameObject buildingGhostObject;
 
 
     public GameObject CurrentBuildingPrefab
@@ -23,18 +23,19 @@ public class Builder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
+
+     
+
+
+
     }
 
-
-
+    
     //TODO: research property serialization and possible event call on assignment
     public void selectPrefab(GameObject buildingPrefab)
     {
