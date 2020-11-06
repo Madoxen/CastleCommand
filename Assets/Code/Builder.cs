@@ -10,12 +10,13 @@ using UnityEngine.InputSystem;
 public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk about it with the team if this makes sense 
 {
     [SerializeField]
-    GameObject currentBuildingPrefab;
-    BuildingGhost ghost;
-    MeshFilter meshFilter;
-    MeshCollider meshCollider;
-    MasterInput input;
-
+    private GameObject currentBuildingPrefab;
+    private BuildingGhost ghost;
+    private MeshFilter meshFilter;
+    private MeshCollider meshCollider;
+    private new MeshRenderer renderer;
+    private MasterInput input;
+    
 
     public GameObject CurrentBuildingPrefab
     {
@@ -31,15 +32,18 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         ghost = GetComponent<BuildingGhost>();
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
-        ghost.enabled = true;
+        renderer = GetComponent<MeshRenderer>();
+        
+
         input.Builder.CancelBuild.performed += CancelBuild_performed;
         input.Builder.ConfirmBuild.performed += ConfirmBuild_performed;
 
+        SelectPrefab(null);
     }
 
     private void ConfirmBuild_performed(InputAction.CallbackContext obj)
     {
-        if(ghost.IsValid)
+        if(CurrentBuildingPrefab != null && ghost.IsValid)
             Build(transform.position);
     }
 
@@ -72,6 +76,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         if (buildingPrefab == null)
         {
             ghost.enabled = false;
+            renderer.enabled = false;
             return;
         }
 
@@ -80,6 +85,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshFilter.mesh = m;
         meshCollider.sharedMesh = m;
         ghost.enabled = true;
+        renderer.enabled = true;
     }
 
     //Instantiate currentBuildingPrefab at given position
