@@ -11,6 +11,7 @@ public class EnemyBasicNav : MonoBehaviour
 {
 
     NavMeshAgent navAgent;
+    Building target;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,26 +24,26 @@ public class EnemyBasicNav : MonoBehaviour
     {
         while (true)
         {
-            if (navAgent.destination == this.transform.position)
+            if (target == null)
             {
                 FindNearestBuilding();
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
 
     void FindNearestBuilding()
     {
-        Vector3 pos = EntityRegister.Buildings.Aggregate((x, y) =>
+        target = EntityRegister.Buildings.Aggregate((x, y) =>
         {
             if (Vector3.Distance(this.transform.position, y.transform.position) < Vector3.Distance(this.transform.position, x.transform.position))
             {
                 return y;
             }
             return x;
-        }).transform.position;
-        navAgent.destination = pos;
+        });
+        navAgent.destination = target.transform.position;
     }
 
 
