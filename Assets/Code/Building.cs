@@ -10,7 +10,10 @@ public class Building : MonoBehaviour
 {
 
 
-
+    private void Awake()
+    {
+        EntityRegister.Buildings.Add(this);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +25,10 @@ public class Building : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        EntityRegister.Buildings.Remove(this);
     }
 }
