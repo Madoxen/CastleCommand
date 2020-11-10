@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6905577d136a5cb4cafbf8d244360e2e, type: 3}
   m_Name: SpawnableEnemies
   m_EditorClassIdentifier: 
-  prefabList: []
+  prefabList:
+  - {fileID: 5427670615526855147, guid: 5a71ff0739e453d419bb43dc842aa233, type: 3}
