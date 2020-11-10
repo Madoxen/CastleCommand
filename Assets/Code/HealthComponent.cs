@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 
-
 public class HealthComponent : MonoBehaviour
 {
     private int currentHealth;

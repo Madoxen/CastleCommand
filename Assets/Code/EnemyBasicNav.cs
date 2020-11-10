@@ -1,5 +1,4 @@
-﻿using Assets.Code;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +34,9 @@ public class EnemyBasicNav : MonoBehaviour
 
     void FindNearestBuilding()
     {
+        if (EntityRegister.Buildings.Count == 0)
+            return;
+
         target = EntityRegister.Buildings.Aggregate((x, y) =>
         {
             if (Vector3.Distance(this.transform.position, y.transform.position) < Vector3.Distance(this.transform.position, x.transform.position))
@@ -44,6 +46,7 @@ public class EnemyBasicNav : MonoBehaviour
             return x;
         });
         navAgent.destination = target.transform.position;
+
     }
 
 
