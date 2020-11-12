@@ -62,7 +62,8 @@ public class EnemyBasicMeleeAttack : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == currentAttackTarget) 
+
+        if (other.gameObject == currentAttackTarget) //if left attack range  
         {
             currentAttackTarget = null;
         }
