@@ -30,7 +30,7 @@ public class HealthComponent : MonoBehaviour
             if (currentHealth > maxHealth)
                 currentHealth = maxHealth;
 
-            OnHealthChanged();
+            OnMaxHealthChanged();
         }
     }
 
