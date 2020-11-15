@@ -3,19 +3,19 @@ using System.Collections;
 using System;
 
 
-    //Triggers damage dealer upon timer completion 
-    public class TimedDamageDealerBase : MonoBehaviour
+//Triggers damage dealer upon timer completion 
+public class TimedDamageDealerBase : MonoBehaviour
+{
+    [SerializeField]
+    private float cooldown;
+    public float Cooldown
     {
-        [SerializeField]
-        private float cooldown;
-        public float Cooldown
-        {
-            get { return cooldown; }
-            set { cooldown = value; }
-        }
+        get { return cooldown; }
+        set { cooldown = value; }
+    }
 
-        private float currentAttackCooldown = 0f;
-        public IDamageDealer damageDealerComponent;
+    private float currentAttackCooldown = 0f;
+    public IDamageDealer damageDealerComponent;
 
 
     private void Awake()
@@ -24,12 +24,12 @@ using System;
     }
 
     private void FixedUpdate()
+    {
+        currentAttackCooldown -= Time.fixedDeltaTime;
+        if (currentAttackCooldown <= 0f)
         {
-            currentAttackCooldown -= Time.fixedDeltaTime;
-            if (currentAttackCooldown <= 0f)
-            {
-                damageDealerComponent.Attack();
-                currentAttackCooldown = Cooldown;
-            }
+            damageDealerComponent.Attack();
+            currentAttackCooldown = Cooldown;
         }
     }
+}

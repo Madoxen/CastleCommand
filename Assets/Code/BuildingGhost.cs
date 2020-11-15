@@ -86,6 +86,7 @@ public class BuildingGhost : MonoBehaviour
             CollisionCount++;
     }
 
+    
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))

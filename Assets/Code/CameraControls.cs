@@ -22,9 +22,6 @@ public class CameraControls : MonoBehaviour
         transform.position = transform.position + new Vector3(axis.x * speed, 0, axis.y * speed);
     }
 
-
-
-
     private void OnEnable()
     {
         input.Camera.Move.Enable();
