@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   Name: Stone
-  description: 
+  description: Rocks, building materials
   icon: {fileID: 2094347899734262227, guid: e50d1d4d19269504e9659f70d7aa1576, type: 3}
