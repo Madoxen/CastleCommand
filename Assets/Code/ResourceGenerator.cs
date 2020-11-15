@@ -16,15 +16,18 @@ namespace Assets.Code
         // Use this for initialization
         void Start()
         {
-            StartCoroutine(GenerateResource());
             r = PlayerResources.Instance.Resources.Find(x => x.resource == generatedResource);
+            StartCoroutine(GenerateResource());
         }
 
 
         IEnumerator GenerateResource()
         {
-            r.Amount += amount;
-            yield return new WaitForSeconds(speed);
+            while (true)
+            {
+                r.Amount += amount;
+                yield return new WaitForSeconds(speed);
+            }
         }
     }
 }
