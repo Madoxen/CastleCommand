@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 3373905227316925915}
   - component: {fileID: 6980004376185130953}
   - component: {fileID: 2837484841129061783}
-  m_Layer: 0
+  - component: {fileID: -5180305481056930539}
+  m_Layer: 10
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,3 +141,17 @@ MonoBehaviour:
   generatedResource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
   speed: 2
   amount: 10
+--- !u!114 &-5180305481056930539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593428768501357313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec56a67ac523b54e99e2328c04e1274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 50
+  maxHealth: 50
