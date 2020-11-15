@@ -15,6 +15,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     private MeshCollider meshCollider;
     private new MeshRenderer renderer;
     private MasterInput input;
+    private AudioSource AS;
     
 
     public GameObject CurrentBuildingPrefab
@@ -32,6 +33,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
         renderer = GetComponent<MeshRenderer>();
+        AS = GetComponent<AudioSource>();
         
 
         input.Builder.CancelBuild.performed += CancelBuild_performed;
@@ -42,8 +44,11 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
     private void ConfirmBuild_performed(InputAction.CallbackContext obj)
     {
-        if(CurrentBuildingPrefab != null && ghost.IsValid)
+        if (CurrentBuildingPrefab != null && ghost.IsValid)
+        {
             Build(transform.position);
+            AS.Play();
+        }
     }
 
     private void CancelBuild_performed(InputAction.CallbackContext obj)
