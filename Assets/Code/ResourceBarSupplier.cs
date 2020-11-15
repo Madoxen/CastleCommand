@@ -36,7 +36,9 @@ public class ResourceBarSupplier : MonoBehaviour
         {
             GameObject barItem = Instantiate(itemPrefab, this.transform);
             barItem.name = "barItem_" + resource.resource.Name;
-            barItem.GetComponentInChildren<Image>().sprite = resource.resource.icon;
+            barItem.GetComponentsInChildren<Image>()[1].sprite = resource.resource.icon; //GetComponentinChildren gets component in parent as well, so we need to skip one
+            barItem.GetComponentInChildren<Text>().text = resource.Amount + "/" + resource.MaxAmount;
+
 
             //Update event
             resource.AmountChanged += (_) =>
