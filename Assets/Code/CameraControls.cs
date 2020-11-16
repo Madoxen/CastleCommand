@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
-    public Vector2 center = new Vector2(90f,100f);
-    public float maxDistanceFromCenter = 10f;
-    public float maxHeight = 8f;
+    public Vector2 center = new Vector2(91f,98f);
+    public float maxDistanceFromCenter = 6f;
+    public float maxHeight = 6f;
     public float minHeight = 2f;
 
     public float speed = 2.5f;
