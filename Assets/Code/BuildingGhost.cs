@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections.Generic;
 
 public class BuildingGhost : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class BuildingGhost : MonoBehaviour
         get { return isValid; }
         private set
         {
+            if (isValid == value)
+                return;
+
             isValid = value;
             if (isValid == true)
             {
@@ -41,6 +45,8 @@ public class BuildingGhost : MonoBehaviour
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
+    private bool isCollidingWithOtherBuildings = false;
+
 
     private void Awake()
     {
@@ -70,6 +76,11 @@ public class BuildingGhost : MonoBehaviour
     }
 
 
+    public void FixedUpdate()
+    {
+        IsValid = true;
+    }
+
     private void OnEnable()
     {
         input.Builder.MouseMove.Enable();
@@ -80,16 +91,14 @@ public class BuildingGhost : MonoBehaviour
         input.Builder.MouseMove.Disable();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-            CollisionCount++;
-    }
+        if (!IsValid)
+            return;
 
-    
-    void OnTriggerExit(Collider other)
-    {
         if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-            CollisionCount--;
+        {
+            IsValid = false;
+        }
     }
 }
