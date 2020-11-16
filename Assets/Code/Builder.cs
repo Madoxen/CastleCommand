@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 //Responsible for positioning and instantiating buildings
 //Also shows building ghost if a building is chosen
@@ -16,7 +17,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     private new MeshRenderer renderer;
     private MasterInput input;
     private AudioSource AS;
-    
+
 
     public GameObject CurrentBuildingPrefab
     {
@@ -34,7 +35,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshCollider = GetComponent<MeshCollider>();
         renderer = GetComponent<MeshRenderer>();
         AS = GetComponent<AudioSource>();
-        
+
 
         input.Builder.CancelBuild.performed += CancelBuild_performed;
         input.Builder.ConfirmBuild.performed += ConfirmBuild_performed;
@@ -44,7 +45,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
     private void ConfirmBuild_performed(InputAction.CallbackContext obj)
     {
-        if (CurrentBuildingPrefab != null && ghost.IsValid)
+        if (CurrentBuildingPrefab != null && ghost.IsValid && CheckBuildingRules())
         {
             Build(transform.position);
             AS.Play();
@@ -56,11 +57,17 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         CurrentBuildingPrefab = null;
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool CheckBuildingRules()
     {
-
+        List<IBuildingRule> rules = CurrentBuildingPrefab.GetComponents<IBuildingRule>().ToList();
+        if (rules.All(x => x.IsRuleValid()))
+        {
+            rules.ForEach(x => x.AfterBuildEffect());
+               return true;
+        }
+        return false;
     }
+
 
     private void OnEnable()
     {
@@ -71,7 +78,6 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     {
         input.Builder.Disable();
     }
-
 
     //TODO: research property serialization and possible event call on assignment
     private void SelectPrefab(GameObject buildingPrefab)

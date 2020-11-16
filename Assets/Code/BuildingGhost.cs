@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System;
 using System.Collections.Generic;
 
+//TODO: Extract this as IBuildingRule
 public class BuildingGhost : MonoBehaviour
 {
     public bool IsValid
@@ -32,7 +33,6 @@ public class BuildingGhost : MonoBehaviour
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
-    private bool isCollidingWithOtherBuildings = false;
 
 
     private void Awake()
