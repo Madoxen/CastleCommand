@@ -1371,8 +1371,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1187522755}
   - component: {fileID: 1187522754}
+  - component: {fileID: 1187522756}
   m_Layer: 0
-  m_Name: Singletons
+  m_Name: Singletons/SingleStartScripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,6 +1406,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1187522756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187522753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3aeff4b6be42d47ba60caf38cbd8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Resources:
+  - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+    amount: 300
 --- !u!1001 &1305781236
 PrefabInstance:
   m_ObjectHideFlags: 0
