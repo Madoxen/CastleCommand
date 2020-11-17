@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6980004376185130953}
   - component: {fileID: 2837484841129061783}
   - component: {fileID: -5180305481056930539}
+  - component: {fileID: 8099363082635191349}
+  - component: {fileID: 8679452994596093355}
   m_Layer: 10
   m_Name: House
   m_TagString: Untagged
@@ -155,3 +157,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 50
   maxHealth: 50
+--- !u!114 &8099363082635191349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593428768501357313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051c2b66df863e94389cdaed652a8f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8679452994596093355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593428768501357313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f47fe0d4d8f544bb91b61b99c1ceb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceCosts:
+  - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+    amount: 100

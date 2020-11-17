@@ -10,7 +10,7 @@ public class BuildingGhost : MonoBehaviour
     public bool IsValid
     {
         get { return isValid; }
-        private set
+        set
         {
             if (isValid == value)
                 return;
@@ -33,7 +33,7 @@ public class BuildingGhost : MonoBehaviour
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
-
+    public event Action<Collider> CollisionStayed;
 
     private void Awake()
     {
@@ -62,12 +62,6 @@ public class BuildingGhost : MonoBehaviour
         }
     }
 
-
-    public void FixedUpdate()
-    {
-        IsValid = true;
-    }
-
     private void OnEnable()
     {
         input.Builder.MouseMove.Enable();
@@ -78,14 +72,9 @@ public class BuildingGhost : MonoBehaviour
         input.Builder.MouseMove.Disable();
     }
 
+
     private void OnTriggerStay(Collider other)
     {
-        if (!IsValid)
-            return;
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-        {
-            IsValid = false;
-        }
+        CollisionStayed?.Invoke(other);
     }
 }

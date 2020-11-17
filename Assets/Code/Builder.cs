@@ -11,13 +11,13 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 {
     [SerializeField]
     private GameObject currentBuildingPrefab;
-    private BuildingGhost ghost;
+    public BuildingGhost ghost { get; private set; }
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
     private new MeshRenderer renderer;
     private MasterInput input;
     private AudioSource AS;
-
+    private List<IBuildingRule> currentBuildingRules;
 
     public GameObject CurrentBuildingPrefab
     {
@@ -45,9 +45,10 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
     private void ConfirmBuild_performed(InputAction.CallbackContext obj)
     {
-        if (CurrentBuildingPrefab != null && ghost.IsValid && CheckBuildingRules())
+        if (CurrentBuildingPrefab != null && ghost.IsValid)
         {
             Build(transform.position);
+            currentBuildingRules?.ForEach(x => x.AfterBuildEffect());
             AS.Play();
         }
     }
@@ -57,17 +58,17 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         CurrentBuildingPrefab = null;
     }
 
-    private bool CheckBuildingRules()
-    {
-        List<IBuildingRule> rules = CurrentBuildingPrefab.GetComponents<IBuildingRule>().ToList();
-        if (rules.All(x => x.IsRuleValid()))
-        {
-            rules.ForEach(x => x.AfterBuildEffect());
-               return true;
-        }
-        return false;
-    }
 
+    private void FixedUpdate()
+    {
+        if (currentBuildingRules != null)
+        {
+            ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid()); //so this is REALLY bad, todo: change into event driven architecture?
+        }
+        else
+            ghost.IsValid = true;
+        
+    }
 
     private void OnEnable()
     {
@@ -82,11 +83,13 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     //TODO: research property serialization and possible event call on assignment
     private void SelectPrefab(GameObject buildingPrefab)
     {
+        currentBuildingRules?.ForEach(x => x.Dispose());
         currentBuildingPrefab = buildingPrefab;
         if (buildingPrefab == null)
         {
             ghost.enabled = false;
             renderer.enabled = false;
+            currentBuildingRules = null;
             return;
         }
 
@@ -96,12 +99,15 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshCollider.sharedMesh = m;
         ghost.enabled = true;
         renderer.enabled = true;
+
+        currentBuildingRules = buildingPrefab.GetComponents<IBuildingRule>().ToList();
+        currentBuildingRules.ForEach(x => x.Init(this));
     }
 
     //Instantiate currentBuildingPrefab at given position
     private void Build(Vector3 worldCoords)
     {
-        Instantiate(CurrentBuildingPrefab, worldCoords, Quaternion.identity);
+        GameObject building = Instantiate(CurrentBuildingPrefab, worldCoords, Quaternion.identity);
     }
 
 }
