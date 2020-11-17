@@ -108,6 +108,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     private void Build(Vector3 worldCoords)
     {
         GameObject building = Instantiate(CurrentBuildingPrefab, worldCoords, Quaternion.identity);
+        building.GetComponents<IBuildingRule>().ToList().ForEach(x => Destroy((MonoBehaviour)x)); //we dont want building rules on already built buildings
     }
 
 }
