@@ -18,7 +18,7 @@ public class CollisionBuildingRule : MonoBehaviour, IBuildingRule
         builder.ghost.CollisionStayed += CollisionRegistered;
     }
 
-    public void Dispose()
+    public void Dispose() //TODO: better name for this type of method? (reason: collides with System Dispose which can have a bit different meaning) 
     {
         builder.ghost.CollisionStayed -= CollisionRegistered; //unregister
     }
