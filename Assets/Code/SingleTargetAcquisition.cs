@@ -14,20 +14,14 @@ public class SingleTargetAcquisition : MonoBehaviour
         set { currentAttackTarget = value; }
     }
 
-
-
-
-
     private void OnTriggerStay(Collider other)
     {
         if (CurrentAttackTarget != null)
             return;
 
-        if (other.gameObject.GetComponent<Enemy>() && other.gameObject.GetComponent<HealthComponent>()) //This might be performance taxing
+        if (other.gameObject.GetComponent<Enemy>() && other.gameObject.GetComponent<HealthComponent>()) 
         {
             CurrentAttackTarget = other.gameObject;
         }
     }
-
-
 }

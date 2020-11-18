@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea927b1669f148418297da96189ffee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: Houses your villagers, that give you gold in return.
 --- !u!23 &4000056559578000191
 MeshRenderer:
   m_ObjectHideFlags: 0

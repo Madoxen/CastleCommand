@@ -10,6 +10,6 @@ public class PlayerResourceSetter : MonoBehaviour
 
     private void Awake()
     {
-        Resources.ForEach(x=> PlayerResources.Instance.Resources.FirstOrDefault(y=>y.resource == x.resource).Amount = x.amount );
+        Resources.ForEach(x=> PlayerResources.Instance.Resources.FirstOrDefault(y=>y.resource == x.resource).Amount = x.amount);
     }
 }
