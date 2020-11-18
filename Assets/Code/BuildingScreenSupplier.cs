@@ -59,8 +59,8 @@ public class BuildingScreenSupplier : MonoBehaviour
 
             Building bld = prefab.GetComponent<Building>();
 
-            string TooltipText = bld.name + "\n" +
-              "<style=\"Quote\">" + bld.description + "</style>\n";
+            string TooltipText = "<style=\"H1\">" + bld.name + "</style>\n" +
+              "<style=\"Quote\">" + bld.description + "</style>\n<style=H2>";
 
 
 
@@ -70,9 +70,11 @@ public class BuildingScreenSupplier : MonoBehaviour
                 foreach (ResourceCost rc in cost.resourceCosts)
                 {
                     StrategicResource r = rc.resource;
-                    TooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :  " + rc.amount + "\n";
-                    }
+                    TooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
+                }
             }
+
+            TooltipText += "</style>";
 
 
             EventTrigger trigger = b.GetComponent<EventTrigger>();

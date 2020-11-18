@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea927b1669f148418297da96189ffee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: Most basic line of defence. Shoots arrows at enemies dealing low damage.
 --- !u!23 &8201309680920237668
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -60,7 +60,7 @@ public class Tooltip : MonoBehaviour
         Instance.t.text = text;
         //TODO: resize
         Vector2 textSize = Instance.t.GetPreferredValues();
-        Instance.rectTransform.sizeDelta = new Vector2(textSize.x + padding.x, textSize.y + padding.y);
+        Instance.rectTransform.sizeDelta = textSize;
     }
 
     public static void HideTooltip()

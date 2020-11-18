@@ -50,7 +50,7 @@ public class ResourceBarSupplier : MonoBehaviour
             };
 
 
-            string TooltipText = resource.resource.Name + "\n<style=\"Quote\">" +resource.resource.description+"</style>";
+            string TooltipText = "<style=\"H1\">" + resource.resource.Name + "</style>\n<style=\"Quote\">" + resource.resource.description+"</style>";
 
             EventTrigger trigger = barItem.GetComponent<EventTrigger>();
             EventTrigger.Entry entry = new EventTrigger.Entry();
