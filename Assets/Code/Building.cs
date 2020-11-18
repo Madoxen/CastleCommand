@@ -8,7 +8,7 @@ using UnityEngine;
 //Used for registering buildings in building UI
 public class Building : MonoBehaviour
 {
-
+    public string description = "Blah Blash";
 
     private void Awake()
     {

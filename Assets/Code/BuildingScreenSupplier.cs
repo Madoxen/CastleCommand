@@ -57,9 +57,22 @@ public class BuildingScreenSupplier : MonoBehaviour
                 builder.CurrentBuildingPrefab = prefab;
             });
 
+            Building bld = prefab.GetComponent<Building>();
+
+            string TooltipText = bld.name + "\n" +
+              "<style=\"Quote\">" + bld.description + "</style>\n";
 
 
-            string TooltipText = "";
+
+            CostBuildingRule cost = prefab.GetComponent<CostBuildingRule>();
+            if (cost)
+            {
+                foreach (ResourceCost rc in cost.resourceCosts)
+                {
+                    StrategicResource r = rc.resource;
+                    TooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :  " + rc.amount + "\n";
+                    }
+            }
 
 
             EventTrigger trigger = b.GetComponent<EventTrigger>();
@@ -75,7 +88,7 @@ public class BuildingScreenSupplier : MonoBehaviour
 
 
 
-            b.GetComponentInChildren<Text>().text = prefab.GetComponent<Building>().name;
+            b.GetComponentInChildren<Text>().text = bld.name;
 
         }
     }
