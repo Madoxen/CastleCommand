@@ -51,6 +51,7 @@ public class EnemyBasicMeleeAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.GetComponent<Building>() && other.gameObject.GetComponent<HealthComponent>()) //This might be performance taxing
         {
             if (currentAttackTarget == null)

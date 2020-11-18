@@ -6,5 +6,6 @@ public interface ITargetable
 {
     bool IsValidTarget();
     event Action<ITargetable> TargetNoLongerValid;
+    int Group { get; }
 }
 
