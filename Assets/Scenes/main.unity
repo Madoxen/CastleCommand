@@ -488,6 +488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tooltip
       objectReference: {fileID: 0}
+    - target: {fileID: 4480565386016333864, guid: f16db8183cb8b4a4abe5d47b08939944,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4480565386016333865, guid: f16db8183cb8b4a4abe5d47b08939944,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -546,12 +551,12 @@ PrefabInstance:
     - target: {fileID: 4480565386016333865, guid: f16db8183cb8b4a4abe5d47b08939944,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 997.82
+      value: -604
       objectReference: {fileID: 0}
     - target: {fileID: 4480565386016333865, guid: f16db8183cb8b4a4abe5d47b08939944,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -466.5
+      value: -346
       objectReference: {fileID: 0}
     - target: {fileID: 4480565386016333865, guid: f16db8183cb8b4a4abe5d47b08939944,
         type: 3}
@@ -1163,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcd0c320b6b8c740acb2f29466f0e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 0.2
 --- !u!1001 &1012132339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1425,6 +1430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyListSC: {fileID: 11400000, guid: ae71a9f1c652f624b824a954d59a8057, type: 2}
+  spawnCooldown: 2
 --- !u!33 &1103116093
 MeshFilter:
   m_ObjectHideFlags: 0
