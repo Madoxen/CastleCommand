@@ -7,21 +7,32 @@ using System.Collections.Generic;
 public class SingleTargetAcquisition : MonoBehaviour
 {
 
-    private GameObject currentAttackTarget = null;
-    public GameObject CurrentAttackTarget
+    private ITargetable currentAttackTarget = null;
+    public ITargetable CurrentAttackTarget
     {
         get { return currentAttackTarget; }
-        set { currentAttackTarget = value; }
+        private set { currentAttackTarget = value; }
     }
 
-    private void OnTriggerStay(Collider other)
+    private List<ITargetable> availableTargets = new List<ITargetable>();
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (CurrentAttackTarget != null)
-            return;
+        ITargetable t = other.gameObject.GetComponent<ITargetable>();
+        if (t != null)
+            availableTargets.Add(t);
 
-        if (other.gameObject.GetComponent<Enemy>() && other.gameObject.GetComponent<HealthComponent>()) 
-        {
-            CurrentAttackTarget = other.gameObject;
-        }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        availableTargets.Remove(other.GetComponent<ITargetable>());
+    }
+
+    private void OnCurrentTargetNoLongerValid(ITargetable sender)
+    {
+        sender.TargetNoLongerValid -= this.OnCurrentTargetNoLongerValid;
+        
+    }
+
 }

@@ -39,7 +39,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
         input.Builder.CancelBuild.performed += CancelBuild_performed;
         input.Builder.ConfirmBuild.performed += ConfirmBuild_performed;
-
+        input.UI.Disable();
         SelectPrefab(null);
     }
 
