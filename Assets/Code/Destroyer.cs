@@ -73,6 +73,14 @@ public class Destroyer : MonoBehaviour
 
     private void OnCancelDelete()
     {
+        if (lastHit != null)
+        {
+            lastHit.GetComponent<Renderer>().material = lastMaterial;
+            lastMaterial = null;
+            lastHit = null;
+
+        }
+     
         gameObject.SetActive(false);
     }
 
