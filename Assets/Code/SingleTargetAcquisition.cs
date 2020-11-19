@@ -5,6 +5,7 @@ using System;
 
 [RequireComponent(typeof(SphereCollider))]
 //Selects a single target in range of trigger
+//TODO: This is basically synonymous with nearest target acquisition...
 public class SingleTargetAcquisition : MonoBehaviour, ITargetAcquisition
 {
 
@@ -17,15 +18,17 @@ public class SingleTargetAcquisition : MonoBehaviour, ITargetAcquisition
 
     private List<ITargetable> availableTargets = new List<ITargetable>();
     public event Action<ITargetable> TargetAcquired;
+    public int targetTeamID = 0;
+
 
     private void OnTriggerEnter(Collider other)
     {
         ITargetable t = other.gameObject.GetComponent<ITargetable>();
-        if (t != null)
+        if (t != null && t.Team == TeamRegister.GetTeamByID(targetTeamID))
         {
             availableTargets.Add(t);
             t.TargetNoLongerValid += OnCurrentTargetNoLongerValid;
-            CurrentAttackTarget ??= t;
+            CurrentAttackTarget = CurrentAttackTarget ?? t;
         }
     }
 

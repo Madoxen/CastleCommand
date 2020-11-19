@@ -17,11 +17,4 @@ public class EntityRegister
         get { return enemies; }
     }
 
-
-
-    
-
-
-
 }
-

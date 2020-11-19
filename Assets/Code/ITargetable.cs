@@ -2,10 +2,9 @@
 using System.Collections;
 using System;
 
-public interface ITargetable
+public interface ITargetable : ITeamable
 {
     bool IsValidTarget();
     event Action<ITargetable> TargetNoLongerValid;
-    int Group { get; }
 }
 

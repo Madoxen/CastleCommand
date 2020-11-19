@@ -28,8 +28,8 @@ public class TimedDamageDealerBase : MonoBehaviour
         currentAttackCooldown -= Time.fixedDeltaTime;
         if (currentAttackCooldown <= 0f)
         {
-            damageDealerComponent.Attack();
             currentAttackCooldown = Cooldown;
+            damageDealerComponent.Attack();
         }
     }
 }

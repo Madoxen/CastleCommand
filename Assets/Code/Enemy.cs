@@ -4,6 +4,7 @@ using System;
 
 
 //Class describing !basic! enemy properties
+//TODO: change to Unit
 public class Enemy : MonoBehaviour, ITargetable
 {
     [SerializeField]
@@ -13,22 +14,47 @@ public class Enemy : MonoBehaviour, ITargetable
         get { return enemyName; }
     }
 
+    Team team;
+    public Team Team
+    {
+        get => team;
+        set
+        {
+            if (value == null)
+            {
+                TeamRegister.UnregisterTeamMember(this);
+            }
+            else
+            {
+                TeamRegister.UnregisterTeamMember(this);
+                TeamRegister.RegisterTeamMember(this, value);
+            }
+            team = value;
+        }
+    }
+
     public event Action<ITargetable> TargetNoLongerValid;
+
 
     public bool IsValidTarget()
     {
         return GetComponent<HealthComponent>() != null; //Check if target is killable
     }
 
+
+
     private void Awake()
     {
         EntityRegister.Enemies.Add(this);
+        Team = TeamRegister.GetTeamByName("Enemies");
     }
 
     private void OnDestroy()
     {
         TargetNoLongerValid?.Invoke(this); //Tell targeters that this enemy died so it's no longer valid target
         EntityRegister.Enemies.Remove(this);
+        TeamRegister.UnregisterTeamMember(this);
+        TargetNoLongerValid = null;
     }
 
 
