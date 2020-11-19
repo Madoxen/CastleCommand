@@ -48,7 +48,10 @@ public class HealthComponent : MonoBehaviour
         //Notify subscribers about change of health
         HealthChangedEvent?.Invoke(this, currentHealth);
         if (CurrentHealth <= 0)
+        {
             Destroy(this.gameObject);
+                        
+        }
     }
 
     void OnMaxHealthChanged()
