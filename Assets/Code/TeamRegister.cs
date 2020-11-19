@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
 
 public static class TeamRegister
@@ -18,7 +19,7 @@ public static class TeamRegister
     {
         if (member.Team == null)
             return;
-        
+
         member.Team.TeamMemebers.Remove(member);
     }
 
