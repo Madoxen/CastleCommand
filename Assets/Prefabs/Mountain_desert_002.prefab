@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7383768264890135168}
   - component: {fileID: 4727826694520751690}
   - component: {fileID: -8931357123469427864}
-  m_Layer: 0
+  - component: {fileID: 7725769539729799812}
+  m_Layer: 10
   m_Name: Mountain_desert_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.17300001, y: 9.429001, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &7725769539729799812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529200368774768543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 25.203276, y: 18.9946, z: 23}
+  m_Center: {x: -0.17280006, y: 9.429166, z: 0}

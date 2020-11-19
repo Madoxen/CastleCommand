@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8743901439151459063}
   - component: {fileID: 8743901439151459060}
   - component: {fileID: 8743901439151459061}
+  - component: {fileID: -830665579894980173}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -93,3 +94,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyListSC: {fileID: 11400000, guid: ae71a9f1c652f624b824a954d59a8057, type: 2}
+--- !u!65 &-830665579894980173
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743901439151459058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23.66163, y: 22.784042, z: 23.000002}
+  m_Center: {x: 0.33081436, y: 11.392021, z: 0}
