@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BuildingScreenSupplier : MonoBehaviour
@@ -55,6 +56,42 @@ public class BuildingScreenSupplier : MonoBehaviour
             {
                 builder.CurrentBuildingPrefab = prefab;
             });
+
+            Building bld = prefab.GetComponent<Building>();
+
+            string TooltipText = "<style=\"H1\">" + bld.name + "</style>\n" +
+              "<style=\"Quote\">" + bld.description + "</style>\n<style=H2>";
+
+
+
+            CostBuildingRule cost = prefab.GetComponent<CostBuildingRule>();
+            if (cost)
+            {
+                foreach (ResourceCost rc in cost.resourceCosts)
+                {
+                    StrategicResource r = rc.resource;
+                    TooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
+                }
+            }
+
+            TooltipText += "</style>";
+
+
+            EventTrigger trigger = b.GetComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerEnter;
+            entry.callback.AddListener((data) => { Tooltip.ShowTooltip(TooltipText); });
+            trigger.triggers.Add(entry);
+
+            entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerExit;
+            entry.callback.AddListener((data) => { Tooltip.HideTooltip(); });
+            trigger.triggers.Add(entry);
+
+
+
+            b.GetComponentInChildren<Text>().text = bld.name;
+
         }
     }
 }

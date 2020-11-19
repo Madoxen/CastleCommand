@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Assets.Code
-{
+
     public class ResourceGenerator : MonoBehaviour
     {
         public StrategicResource generatedResource;
@@ -30,4 +29,3 @@ namespace Assets.Code
             }
         }
     }
-}

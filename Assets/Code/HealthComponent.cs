@@ -59,4 +59,12 @@ public class HealthComponent : MonoBehaviour
         //Notify subscribers about change of max health
         MaxHealthChangedEvent?.Invoke(this, currentHealth);
     }
+
+
+    private void OnDestroy()
+    {
+        //Unsubscribe everyone from events
+        HealthChangedEvent = null;
+        MaxHealthChangedEvent = null;
+    }
 }

@@ -719,6 +719,71 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Destroyer",
+            "id": "50e44ff9-910e-4f02-8f54-9cbb0228d566",
+            "actions": [
+                {
+                    "name": "ConfirmDelete",
+                    "type": "Button",
+                    "id": "37a3babf-821b-4eea-b2c3-c7c4957bf6c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CancelDelete",
+                    "type": "Button",
+                    "id": "304216d5-d32f-49b5-93f1-3078ddebf8a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MouseMove",
+                    "type": "Button",
+                    "id": "90a4fb8e-0f60-41eb-9219-6ed6e3dc0ae6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b52aaa4c-702d-4197-b372-b68eed42f73e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ConfirmDelete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1af1adb9-b94e-4840-a076-79fb676c8e86",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CancelDelete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ae36f9d-ba10-445a-95b4-9e299f028876",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MouseMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
