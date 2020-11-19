@@ -781,6 +781,71 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Destroyer"",
+            ""id"": ""50e44ff9-910e-4f02-8f54-9cbb0228d566"",
+            ""actions"": [
+                {
+                    ""name"": ""ConfirmDelete"",
+                    ""type"": ""Button"",
+                    ""id"": ""37a3babf-821b-4eea-b2c3-c7c4957bf6c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CancelDelete"",
+                    ""type"": ""Button"",
+                    ""id"": ""304216d5-d32f-49b5-93f1-3078ddebf8a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""90a4fb8e-0f60-41eb-9219-6ed6e3dc0ae6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b52aaa4c-702d-4197-b372-b68eed42f73e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ConfirmDelete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1af1adb9-b94e-4840-a076-79fb676c8e86"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelDelete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ae36f9d-ba10-445a-95b4-9e299f028876"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MouseMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -868,6 +933,11 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_Builder_CancelBuild = m_Builder.FindAction("CancelBuild", throwIfNotFound: true);
         m_Builder_ConfirmBuild = m_Builder.FindAction("ConfirmBuild", throwIfNotFound: true);
         m_Builder_MouseMove = m_Builder.FindAction("MouseMove", throwIfNotFound: true);
+        // Destroyer
+        m_Destroyer = asset.FindActionMap("Destroyer", throwIfNotFound: true);
+        m_Destroyer_ConfirmDelete = m_Destroyer.FindAction("ConfirmDelete", throwIfNotFound: true);
+        m_Destroyer_CancelDelete = m_Destroyer.FindAction("CancelDelete", throwIfNotFound: true);
+        m_Destroyer_MouseMove = m_Destroyer.FindAction("MouseMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1116,6 +1186,55 @@ public class @MasterInput : IInputActionCollection, IDisposable
         }
     }
     public BuilderActions @Builder => new BuilderActions(this);
+
+    // Destroyer
+    private readonly InputActionMap m_Destroyer;
+    private IDestroyerActions m_DestroyerActionsCallbackInterface;
+    private readonly InputAction m_Destroyer_ConfirmDelete;
+    private readonly InputAction m_Destroyer_CancelDelete;
+    private readonly InputAction m_Destroyer_MouseMove;
+    public struct DestroyerActions
+    {
+        private @MasterInput m_Wrapper;
+        public DestroyerActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ConfirmDelete => m_Wrapper.m_Destroyer_ConfirmDelete;
+        public InputAction @CancelDelete => m_Wrapper.m_Destroyer_CancelDelete;
+        public InputAction @MouseMove => m_Wrapper.m_Destroyer_MouseMove;
+        public InputActionMap Get() { return m_Wrapper.m_Destroyer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DestroyerActions set) { return set.Get(); }
+        public void SetCallbacks(IDestroyerActions instance)
+        {
+            if (m_Wrapper.m_DestroyerActionsCallbackInterface != null)
+            {
+                @ConfirmDelete.started -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnConfirmDelete;
+                @ConfirmDelete.performed -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnConfirmDelete;
+                @ConfirmDelete.canceled -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnConfirmDelete;
+                @CancelDelete.started -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnCancelDelete;
+                @CancelDelete.performed -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnCancelDelete;
+                @CancelDelete.canceled -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnCancelDelete;
+                @MouseMove.started -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnMouseMove;
+                @MouseMove.performed -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnMouseMove;
+                @MouseMove.canceled -= m_Wrapper.m_DestroyerActionsCallbackInterface.OnMouseMove;
+            }
+            m_Wrapper.m_DestroyerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ConfirmDelete.started += instance.OnConfirmDelete;
+                @ConfirmDelete.performed += instance.OnConfirmDelete;
+                @ConfirmDelete.canceled += instance.OnConfirmDelete;
+                @CancelDelete.started += instance.OnCancelDelete;
+                @CancelDelete.performed += instance.OnCancelDelete;
+                @CancelDelete.canceled += instance.OnCancelDelete;
+                @MouseMove.started += instance.OnMouseMove;
+                @MouseMove.performed += instance.OnMouseMove;
+                @MouseMove.canceled += instance.OnMouseMove;
+            }
+        }
+    }
+    public DestroyerActions @Destroyer => new DestroyerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1184,6 +1303,12 @@ public class @MasterInput : IInputActionCollection, IDisposable
     {
         void OnCancelBuild(InputAction.CallbackContext context);
         void OnConfirmBuild(InputAction.CallbackContext context);
+        void OnMouseMove(InputAction.CallbackContext context);
+    }
+    public interface IDestroyerActions
+    {
+        void OnConfirmDelete(InputAction.CallbackContext context);
+        void OnCancelDelete(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
     }
 }

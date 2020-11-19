@@ -2,14 +2,19 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections.Generic;
 
+//TODO: Extract this as IBuildingRule
 public class BuildingGhost : MonoBehaviour
 {
     public bool IsValid
     {
         get { return isValid; }
-        private set
+        set
         {
+            if (isValid == value)
+                return;
+
             isValid = value;
             if (isValid == true)
             {
@@ -23,24 +28,12 @@ public class BuildingGhost : MonoBehaviour
     }
     private bool isValid = true;
 
-
-
-    private int collisionCount = 0;
-    private int CollisionCount
-    {
-        get { return collisionCount; }
-        set
-        {
-            collisionCount = value;
-            IsValid = (collisionCount == 0);
-        }
-    }
-
     [SerializeField]
     private Material ghostMat;
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
+    public event Action<Collider> CollisionStayed;
 
     private void Awake()
     {
@@ -69,7 +62,6 @@ public class BuildingGhost : MonoBehaviour
         }
     }
 
-
     private void OnEnable()
     {
         input.Builder.MouseMove.Enable();
@@ -80,16 +72,9 @@ public class BuildingGhost : MonoBehaviour
         input.Builder.MouseMove.Disable();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-            CollisionCount++;
-    }
 
-    
-    void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-            CollisionCount--;
+        CollisionStayed?.Invoke(other);
     }
 }

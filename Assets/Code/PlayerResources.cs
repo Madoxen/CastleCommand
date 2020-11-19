@@ -5,7 +5,6 @@ using System;
 
 public class PlayerResources : MonoBehaviour
 {
-
     private static PlayerResources instance = null;
     public static PlayerResources Instance
     {
