@@ -1915,6 +1915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyListSC: {fileID: 11400000, guid: ae71a9f1c652f624b824a954d59a8057, type: 2}
+  spawnCooldown: 2
 --- !u!33 &1103116093
 MeshFilter:
   m_ObjectHideFlags: 0
