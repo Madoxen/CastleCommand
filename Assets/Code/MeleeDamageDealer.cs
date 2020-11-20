@@ -23,7 +23,7 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer
             return;
 
         if (target != null)
-        { 
+        {
             //check if we are in range
             if (Vector3.Distance(target.transform.position, this.transform.position) < range)
             {

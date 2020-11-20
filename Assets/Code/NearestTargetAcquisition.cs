@@ -68,9 +68,9 @@ public class NearestTargetAcquisition : MonoBehaviour, ITargetAcquisition
 
             if (Vector3.Distance(this.transform.position, a.transform.position) < Vector3.Distance(this.transform.position, b.transform.position))
             {
-                return y;
+                return x;
             }
-            return x;
+            return y;
         });
 
         if (!(teamable is ITargetable target))
