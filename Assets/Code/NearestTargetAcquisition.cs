@@ -59,7 +59,6 @@ public class NearestTargetAcquisition : MonoBehaviour, ITargetAcquisition
             return;
         }
         
-
         ITeamable teamable = targetTeam.TeamMemebers.Aggregate((x, y) =>
         {
             if (!(x is MonoBehaviour a))
@@ -74,13 +73,20 @@ public class NearestTargetAcquisition : MonoBehaviour, ITargetAcquisition
             return x;
         });
 
-        if (teamable is ITargetable target)
-            CurrentAttackTarget = target;
+        if (!(teamable is ITargetable target))
+            return;
 
+        CurrentAttackTarget = target;
         CurrentAttackTarget.TargetNoLongerValid += OnCurrentTargetNoLongerValid;
 
         if (searchCoroutine != null)
-            StopCoroutine(searchCoroutine);
+            StopCoroutine(searchCoroutine); 
+    }
+
+    private void OnDestroy()
+    {
+        TargetAcquired = null;
+        CurrentAttackTarget.TargetNoLongerValid -= OnCurrentTargetNoLongerValid;
     }
 }
 
