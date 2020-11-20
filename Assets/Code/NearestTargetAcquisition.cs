@@ -86,7 +86,8 @@ public class NearestTargetAcquisition : MonoBehaviour, ITargetAcquisition
     private void OnDestroy()
     {
         TargetAcquired = null;
-        CurrentAttackTarget.TargetNoLongerValid -= OnCurrentTargetNoLongerValid;
+        if(CurrentAttackTarget != null)
+            CurrentAttackTarget.TargetNoLongerValid -= OnCurrentTargetNoLongerValid;
     }
 }
 
