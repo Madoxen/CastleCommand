@@ -11,7 +11,6 @@ public class EntityRegister
         get { return buildings; }
     }
 
-
     private static List<Enemy> enemies = new List<Enemy>();
     public static List<Enemy> Enemies
     {

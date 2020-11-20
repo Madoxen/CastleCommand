@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
         get { return enemyListSC; }
     }
 
-
+    public float spawnCooldown = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
             //Choose the prefab
             GameObject chosenPrefab = enemyListSC.prefabList[Random.Range(0, enemyListSC.prefabList.Count)];
             Instantiate(chosenPrefab, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(spawnCooldown);
         }
         
     }
