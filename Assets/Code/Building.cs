@@ -52,9 +52,9 @@ public class Building : MonoBehaviour, ITargetable
 
     private void OnDestroy()
     {
-        TargetNoLongerValid?.Invoke(this);
         TeamRegister.UnregisterTeamMember(this);
         EntityRegister.Buildings.Remove(this);
+        TargetNoLongerValid?.Invoke(this);
         TargetNoLongerValid = null;
     }
 

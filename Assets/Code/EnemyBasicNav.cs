@@ -27,4 +27,10 @@ public class EnemyBasicNav : MonoBehaviour
         if(obj is MonoBehaviour target)
             navAgent.destination = target.transform.position;
     }
+
+
+    private void OnDestroy()
+    {
+        ac.TargetAcquired -= OnTargetAcquired;
+    }
 }

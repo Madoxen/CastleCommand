@@ -51,10 +51,11 @@ public class Enemy : MonoBehaviour, ITargetable
 
     private void OnDestroy()
     {
-        TargetNoLongerValid?.Invoke(this); //Tell targeters that this enemy died so it's no longer valid target
         EntityRegister.Enemies.Remove(this);
         TeamRegister.UnregisterTeamMember(this);
+        TargetNoLongerValid?.Invoke(this); //Tell targeters that this enemy died so it's no longer valid target
         TargetNoLongerValid = null;
+        
     }
 
 
