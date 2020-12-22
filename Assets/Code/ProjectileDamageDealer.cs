@@ -25,28 +25,29 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer
 
     public void Attack()
     {
-        if (!ta.CurrentAttackTarget)
+        if (!(ta.CurrentAttackTarget is MonoBehaviour target))
             return;
 
 
-        Vector3 dir = ((transform.position + arrowOrigin) - ta.CurrentAttackTarget.transform.position).normalized;
+        Vector3 dir = ((transform.position + arrowOrigin) - target.transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, arrowOrigin + transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().HitCallback = OnProjectileHit;
-        projectile.transform.LookAt(ta.CurrentAttackTarget.transform.position);
+        projectile.transform.LookAt(target.transform.position);
         projectile.GetComponent<Rigidbody>().velocity = -dir * ProjectileSpeed;
         Attacked?.Invoke(this);
 
 
         //This is optional, so null check 
+        //TODO: separate audio/visual from purely gameplay components
         GetComponent<VariablePitchClipPlayer>()?.PlaySound();
     }
 
 
     public void OnProjectileHit(Projectile p, Collider col)
     {
-        if (col.gameObject == ta.CurrentAttackTarget)
+        if (ta.CurrentAttackTarget is MonoBehaviour target && col.gameObject == target.gameObject)
         {
-            ta.CurrentAttackTarget.GetComponent<HealthComponent>().CurrentHealth -= Damage;
+            target.GetComponent<HealthComponent>().CurrentHealth -= Damage;
             Destroy(p.gameObject);
         }
     }

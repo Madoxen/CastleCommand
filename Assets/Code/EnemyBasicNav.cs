@@ -6,49 +6,31 @@ using UnityEngine.AI;
 
 //Leads enemy to the nearest building
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(ITargetAcquisition))]
 public class EnemyBasicNav : MonoBehaviour
 {
 
     NavMeshAgent navAgent;
     Building target;
+    ITargetAcquisition ac;
 
     // Start is called before the first frame update
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
-        StartCoroutine(SearchNearest());
+        ac = GetComponent<ITargetAcquisition>();
+        ac.TargetAcquired += OnTargetAcquired;
     }
 
-    IEnumerator SearchNearest()
+    private void OnTargetAcquired(ITargetable obj)
     {
-        while (true)
-        {
-            if (target == null)
-            {
-                FindNearestBuilding();
-            }
-            yield return new WaitForSeconds(1f);
-        }
+        if(obj is MonoBehaviour target)
+            navAgent.destination = target.transform.position;
     }
 
 
-    void FindNearestBuilding()
+    private void OnDestroy()
     {
-        if (EntityRegister.Buildings.Count == 0)
-            return;
-
-        target = EntityRegister.Buildings.Aggregate((x, y) =>
-        {
-            if (Vector3.Distance(this.transform.position, y.transform.position) < Vector3.Distance(this.transform.position, x.transform.position))
-            {
-                return y;
-            }
-            return x;
-        });
-        navAgent.destination = target.transform.position;
-
+        ac.TargetAcquired -= OnTargetAcquired;
     }
-
-
-
 }
