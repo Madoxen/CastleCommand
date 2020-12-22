@@ -1108,6 +1108,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &516753850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8743901439151459058, guid: 43bf54c935c5de996982aba993889d70,
+    type: 3}
+  m_PrefabInstance: {fileID: 879396234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &516753856
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516753850}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 11.831, y: 11.392, z: 11.500001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.33100003, y: 11.392, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &560094316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,6 +1963,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028305541}
   m_CullTransparentMesh: 0
+--- !u!1 &1028599986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8743901439151459058, guid: 43bf54c935c5de996982aba993889d70,
+    type: 3}
+  m_PrefabInstance: {fileID: 780204023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &1028599992
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028599986}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 11.831, y: 11.392, z: 11.500001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.33100003, y: 11.392, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1032854990
 GameObject:
   m_ObjectHideFlags: 0
