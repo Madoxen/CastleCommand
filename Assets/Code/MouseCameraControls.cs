@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControls : MonoBehaviour
+public class MouseCameraControls : MonoBehaviour
 {
     public Vector2 center = new Vector2(90f,100f);
     public float maxDistanceFromCenter = 10f;
     public float maxHeight = 8f;
     public float minHeight = 2f;
 
-    public float speed = 2.5f;
+    public float speed = 2f;
     public float zoomingSpeed = 0.5f;
     public bool moveAllowed = false;
 
