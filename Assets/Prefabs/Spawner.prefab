@@ -93,7 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88cdbaea66e464419075cc1d466dd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenarioSC: {fileID: 11400000, guid: b28081ad7c0692887877b3d1b1b69a0c, type: 2}
   enemyListSC: {fileID: 11400000, guid: ae71a9f1c652f624b824a954d59a8057, type: 2}
+  spawnCooldown: 60
 --- !u!65 &-830665579894980173
 BoxCollider:
   m_ObjectHideFlags: 0
