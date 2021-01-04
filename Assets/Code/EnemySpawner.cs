@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField]
+    private ScenarioSC scenarioSC;
+    public ScenarioSC ScenarioSC
+    {
+        get { return scenarioSC; }
+    }
+
+
     [SerializeField]
     private EnemyListSC enemyListSC;
     public EnemyListSC EnemyListSC
@@ -11,11 +21,14 @@ public class EnemySpawner : MonoBehaviour
         get { return enemyListSC; }
     }
 
-    public float spawnCooldown = 2f;
+    public float spawnCooldown = 60f;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(scenarioSC);
         StartCoroutine(SpawnEnemy());
     }
 
@@ -25,18 +38,26 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    IEnumerator SpawnEnemy() 
+    void Spawn(GameObject chosenPrefab, int n)
     {
-        while (true)
+        for (int i = 0; i < n; i++)
         {
-            //Choose the prefab
-            GameObject chosenPrefab = enemyListSC.prefabList[Random.Range(0, enemyListSC.prefabList.Count)];
             Instantiate(chosenPrefab, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(spawnCooldown);
         }
         
     }
-        
 
-
+    IEnumerator SpawnEnemy() 
+    {
+        foreach (var wave in scenarioSC.Waves)
+        {
+            Debug.Log(wave);
+            var enemies = EnemyKnapsack.MakeVawe(wave,enemyListSC.Pricing);
+            foreach (var enemy in enemies)
+            {
+                Spawn(enemy.Key, enemy.Value);
+            }
+            yield return new WaitForSeconds(spawnCooldown);
+        }
+    }
 }
