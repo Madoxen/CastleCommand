@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6905577d136a5cb4cafbf8d244360e2e, type: 3}
   m_Name: SpawnableEnemies
   m_EditorClassIdentifier: 
-  prefabList:
-  - {fileID: 5427670615526855147, guid: 5a71ff0739e453d419bb43dc842aa233, type: 3}
+  Pricing:
+  - Enemy: {fileID: 5427670615526855147, guid: 5a71ff0739e453d419bb43dc842aa233, type: 3}
+    Price: 10
+  - Enemy: {fileID: 4259915934627950965, guid: 0bffe299c8a3e96e69c289e7c53389ad, type: 3}
+    Price: 50
+  - Enemy: {fileID: 6036890579382783073, guid: a4afaae7f7e3005e9a8ac0b9143b6a33, type: 3}
+    Price: 150
