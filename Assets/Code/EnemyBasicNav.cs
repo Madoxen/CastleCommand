@@ -26,6 +26,7 @@ public class EnemyBasicNav : MonoBehaviour
     {
         if(obj is MonoBehaviour target)
             navAgent.destination = target.transform.position;
+        
     }
 
 

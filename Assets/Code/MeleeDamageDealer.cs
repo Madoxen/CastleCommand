@@ -28,8 +28,8 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer
             if (Vector3.Distance(target.transform.position, this.transform.position) < range)
             {
                 target.GetComponent<HealthComponent>().CurrentHealth -= damage;
+                Attacked?.Invoke(this);
             }
-            Attacked?.Invoke(this);
         }
 
     }
