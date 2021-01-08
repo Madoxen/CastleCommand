@@ -7,7 +7,7 @@ public class CollisionBuildingRule : MonoBehaviour, IBuildingRule
     private Builder builder;
     private Collider c; //A bounding box of chosen prefab
 
-    public void AfterBuildEffect()
+    public void AfterBuildEffect(GameObject newBuilding)
     {
 
     }
