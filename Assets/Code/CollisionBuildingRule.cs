@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
-
+using System.Linq;
 
 public class CollisionBuildingRule : MonoBehaviour, IBuildingRule
 {
-    private bool isValid = true;
     private Builder builder;
+    private Collider c; //A bounding box of chosen prefab
 
     public void AfterBuildEffect()
     {
@@ -15,25 +15,16 @@ public class CollisionBuildingRule : MonoBehaviour, IBuildingRule
     public void Init(Builder b)
     {
         builder = b;
-        builder.ghost.CollisionStayed += CollisionRegistered;
+        c = builder.ghost.GetComponent<MeshCollider>();
     }
 
-    public void Dispose() //TODO: better name for this type of method? (reason: collides with System Dispose which can have a bit different meaning) 
-    {
-        builder.ghost.CollisionStayed -= CollisionRegistered; //unregister
-    }
+    public void Dispose() { }
 
 
     public bool IsRuleValid()
     {
-        return true;
+        Bounds bounds = c.bounds;
+        return !Physics.CheckBox(bounds.center, bounds.extents, builder.ghost.transform.rotation, 1024, QueryTriggerInteraction.Collide);
     }
 
-    void CollisionRegistered(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Buildings"))
-        {
-            builder.ghost.IsValid = false;
-        }
-    }
 }
