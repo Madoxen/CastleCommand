@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -57,25 +58,16 @@ public class BuildingScreenSupplier : MonoBehaviour
                 builder.CurrentBuildingPrefab = prefab;
             });
 
-            Building bld = prefab.GetComponent<Building>();
 
-            string TooltipText = "<style=\"H1\">" + bld.name + "</style>\n" +
-              "<style=\"Quote\">" + bld.description + "</style>\n<style=H2>";
-
-
-
-            CostBuildingRule cost = prefab.GetComponent<CostBuildingRule>();
-            if (cost)
+            string TooltipText = "";
+            ITooltipDescriptor[] descriptors = prefab.GetComponentsInChildren<ITooltipDescriptor>();
+            foreach (ITooltipDescriptor td in descriptors)
             {
-                foreach (ResourceCost rc in cost.resourceCosts)
-                {
-                    StrategicResource r = rc.resource;
-                    TooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
-                }
+                string desc = td.CreateDescription();
+                if (!desc.EndsWith("\n"))
+                    desc += "\n";
+                TooltipText += desc;
             }
-
-            TooltipText += "</style>";
-
 
             EventTrigger trigger = b.GetComponent<EventTrigger>();
             EventTrigger.Entry entry = new EventTrigger.Entry();
@@ -89,7 +81,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             trigger.triggers.Add(entry);
 
 
-
+            Building bld = prefab.GetComponent<Building>();
             b.GetComponentInChildren<Text>().text = bld.name;
 
         }
