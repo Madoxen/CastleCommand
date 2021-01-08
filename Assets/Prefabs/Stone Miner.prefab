@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6101471938663214833}
   - component: {fileID: 2785243952405640644}
   - component: {fileID: 3844082083974688680}
+  - component: {fileID: -1595277318627332369}
   m_Layer: 10
   m_Name: Stone Miner
   m_TagString: Untagged
@@ -184,6 +185,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredResource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
+--- !u!114 &-1595277318627332369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844082083974688687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2276d2b67ebe8714d9124c0467b4bc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generatedResource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
+  speed: 1
+  amount: 5
 --- !u!1001 &2988978379330991823
 PrefabInstance:
   m_ObjectHideFlags: 0

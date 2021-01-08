@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.InputSystem;
 
 public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
 {
@@ -10,6 +11,11 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
     [SerializeField]
     private StrategicResource requiredResource;
     private StrategicResourceNode nodeToBuildAt = null;
+
+    private void Awake()
+    {
+    }
+
 
     public void AfterBuildEffect(GameObject newBuilding)
     {
@@ -33,7 +39,9 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
         collider = builder.ghost.GetComponent<MeshCollider>();
     }
 
-    public void Dispose() { }
+    public void Dispose() {
+        builder.ghost.moveable = true;
+    }
 
 
     public bool IsRuleValid()
@@ -41,22 +49,25 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
         Bounds bounds = collider.bounds;
         nodeToBuildAt = null;
         //2048 -> Resource nodes/fields layer
-        Collider[] colliders = Physics.OverlapBox(bounds.center, bounds.extents, builder.ghost.transform.rotation, 2048, QueryTriggerInteraction.Collide);
-        //might be taxing if called every frame? 
-        //Find matching collider
-        Debug.Log(colliders);
-        foreach (Collider c in colliders)
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 2048))
         {
-            Debug.Log(c.gameObject.name);
-            StrategicResourceNode srn = c.gameObject.GetComponent<StrategicResourceNode>();
+            StrategicResourceNode srn = hit.collider.gameObject.GetComponent<StrategicResourceNode>();
             if (srn != null)
                 if (srn.RepresentedResource == requiredResource && srn.OccupyingBuilding == null)
                 {
+                    builder.ghost.moveable = false;
                     nodeToBuildAt = srn;
+                    builder.ghost.transform.position = new Vector3(srn.transform.position.x,
+                        srn.transform.position.y,
+                        srn.transform.position.z);
                     return true;
                 }
         }
-
+        else
+        {
+            builder.ghost.moveable = true;
+        }
         return false;
     }
 
