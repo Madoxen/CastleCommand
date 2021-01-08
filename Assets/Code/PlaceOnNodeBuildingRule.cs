@@ -26,6 +26,7 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
         if (newBuilding.TryGetComponent(out Building b))
         {
             nodeToBuildAt.OccupyingBuilding = b;
+            builder.ghost.moveable = true;
         }
         else
         {
@@ -39,7 +40,8 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
         collider = builder.ghost.GetComponent<MeshCollider>();
     }
 
-    public void Dispose() {
+    public void Dispose()
+    {
         builder.ghost.moveable = true;
     }
 
