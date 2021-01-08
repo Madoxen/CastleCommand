@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.InputSystem;
 
-public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
+public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule, ITooltipDescriptor
 {
     private Builder builder;
     private new Collider collider; //A bounding box of chosen prefab
@@ -73,4 +73,9 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule
         return false;
     }
 
+    public string CreateDescription()
+    {
+        //TODO: change to icon
+        return "Needs to be placed on" + requiredResource.Name + "resource node";
+    }
 }

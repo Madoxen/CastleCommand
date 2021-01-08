@@ -6,7 +6,7 @@ using System;
 //Shoots projectiles at enemies
 //Requirements: ProjectilePrefab must have a Projectile Component
 [RequireComponent(typeof(SingleTargetAcquisition))]
-public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer
+public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDescriptor
 {
     public GameObject projectilePrefab;
     public int Damage;
@@ -58,5 +58,10 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer
         // Display the explosion radius when selected
         Gizmos.color = new Color(1, 0, 0);
         Gizmos.DrawSphere(transform.position + arrowOrigin, 0.1f);
+    }
+
+    public string CreateDescription()
+    {
+        return "Damage: " + Damage + "\nProjectile Speed: " + ProjectileSpeed;
     }
 }
