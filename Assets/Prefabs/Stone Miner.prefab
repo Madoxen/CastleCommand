@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea927b1669f148418297da96189ffee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Miner MINE
+  description: Mines stone that is used for building simple structures
 --- !u!23 &3844082083974688683
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e773be4e8e6c49f41bb67bfe941451c0, type: 2}
+  - {fileID: 2100000, guid: 13b84f3a3e7865743b486bbd0078097f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3844082083974688687}
-  m_Mesh: {fileID: -2432090755550338912, guid: b807c6960c24bbd40a54f20f6360657e, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: e6c5d045951d0ec40ae4ae302abaaeba, type: 3}
 --- !u!64 &3844082083974688682
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec56a67ac523b54e99e2328c04e1274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 200
+  currentHealth: 50
   maxHealth: 200
 --- !u!208 &7201108248471845372
 NavMeshObstacle:
