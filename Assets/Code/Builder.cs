@@ -63,7 +63,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     {
         if (currentBuildingRules != null)
         {
-            ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid()); //so this is REALLY bad, todo: change into event driven architecture?
+            ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid());
         }
         else
             ghost.IsValid = true;

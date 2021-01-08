@@ -33,7 +33,6 @@ public class BuildingGhost : MonoBehaviour
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
-    public event Action<Collider> CollisionStayed;
 
     private void Awake()
     {
@@ -72,9 +71,4 @@ public class BuildingGhost : MonoBehaviour
         input.Builder.MouseMove.Disable();
     }
 
-
-    private void OnTriggerStay(Collider other)
-    {
-        CollisionStayed?.Invoke(other);
-    }
 }
