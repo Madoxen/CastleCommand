@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(scenarioSC);
         StartCoroutine(SpawnEnemy());
     }
 
@@ -51,7 +50,6 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var wave in scenarioSC.Waves)
         {
-            Debug.Log(wave);
             var enemies = EnemyKnapsack.MakeVawe(wave,enemyListSC.Pricing);
             foreach (var enemy in enemies)
             {

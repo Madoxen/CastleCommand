@@ -30,8 +30,6 @@ public class MouseCameraControls : MonoBehaviour
         float zoom = input.Camera.Zoom.ReadValue<float>();
         Vector3 camPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
 
-        Debug.Log(zoom);
-
         if (moveAllowed) camPos = transform.position - speed * transform.position.y * (Quaternion.Euler(0f,transform.rotation.eulerAngles.y,0f) * (new Vector3(axis.x, 0, axis.y)));
         camPos += (Quaternion.Euler(-transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f) * (new Vector3(0, zoom * zoomingSpeed, 0)));
 
