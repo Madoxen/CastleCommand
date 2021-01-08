@@ -7,7 +7,7 @@ using UnityEngine;
 
 //Class representing building component
 //Used for registering buildings in building UI
-public class Building : MonoBehaviour, ITargetable
+public class Building : MonoBehaviour, ITargetable, INotifyDestroy
 {
     public string description = "Blah Blash";
 
@@ -31,6 +31,7 @@ public class Building : MonoBehaviour, ITargetable
     }
 
     public event Action<ITargetable> TargetNoLongerValid;
+    public event Action<INotifyDestroy> WillBeDestroyed;
 
     private void Awake()
     {
@@ -55,6 +56,8 @@ public class Building : MonoBehaviour, ITargetable
         TeamRegister.UnregisterTeamMember(this);
         EntityRegister.Buildings.Remove(this);
         TargetNoLongerValid?.Invoke(this);
+        WillBeDestroyed?.Invoke(this);
+        WillBeDestroyed = null; 
         TargetNoLongerValid = null;
     }
 

@@ -10,7 +10,7 @@ public class CostBuildingRule : MonoBehaviour, IBuildingRule
     public List<ResourceCost> resourceCosts = new List<ResourceCost>();
     private Builder builder;
 
-    public void AfterBuildEffect()
+    public void AfterBuildEffect(GameObject newBuilding)
     {
         foreach (ResourceCost c in resourceCosts)
         {
