@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.InputSystem;
 
-public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule, ITooltipDescriptor
+public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule, IDescriptorCreator
 {
     private Builder builder;
     private new Collider collider; //A bounding box of chosen prefab
@@ -73,9 +73,13 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule, ITooltipDes
         return false;
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        //TODO: change to icon
-        return "Needs to be placed on" + requiredResource.Name + "resource node";
+        return new Descriptor
+        {
+            group = DescriptorGroup.WARNINGS,
+            priority = 0,
+            text = "<style=Warning>Needs to be placed on <sprite=\"GameIcons\" name=\"" + requiredResource.icon.name + "\"/> resource node</style>"
+        };
     }
 }

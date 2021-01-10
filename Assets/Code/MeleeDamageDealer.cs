@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(ITargetAcquisition))]
-public class MeleeDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDescriptor
+public class MeleeDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorCreator
 {
     public event Action<object> Attacked;
     public float range;
@@ -39,8 +39,13 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDescripto
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "Damage: " + damage + "\nRange: " + range;
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 1,
+            text = "<Style=Stats>Damage: " + damage + "\nRange: " + range + "</style>"
+        };
     }
 }
