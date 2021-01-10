@@ -94,7 +94,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
             return;
         }
 
-        Mesh m = buildingPrefab.GetComponent<MeshFilter>().sharedMesh;
+        Mesh m = buildingPrefab.GetComponentInChildren<MeshFilter>().sharedMesh;
         //Activate the building ghost
         meshFilter.mesh = m;
         meshCollider.sharedMesh = m;
