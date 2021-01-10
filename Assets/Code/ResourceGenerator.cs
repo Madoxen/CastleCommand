@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class ResourceGenerator : MonoBehaviour, ITooltipDescriptor
+public class ResourceGenerator : MonoBehaviour, IDescriptorCreator
 {
     public StrategicResource generatedResource;
     public float speed;
@@ -29,8 +29,13 @@ public class ResourceGenerator : MonoBehaviour, ITooltipDescriptor
         }
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "<style=Stats>Generates <sprite=\"GameIcons\" name=\"" + generatedResource.icon.name + "\"/> " + amount + " / " + speed + "s</style>";
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 3,
+            text = "<style=Stats>Generates <sprite=\"GameIcons\" name=\"" + generatedResource.icon.name + "\"/> " + amount + " / " + speed + "s</style>"
+        };
     }
 }

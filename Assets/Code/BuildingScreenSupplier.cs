@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -51,22 +52,32 @@ public class BuildingScreenSupplier : MonoBehaviour
             button.name = "button_build" + prefab.name;
             //TODO: customize buttons based on prefab
 
-
             Button b = button.GetComponent<Button>();
             b.onClick.AddListener(() =>
             {
                 builder.CurrentBuildingPrefab = prefab;
             });
 
-
-            string TooltipText = "";
-            ITooltipDescriptor[] descriptors = prefab.GetComponentsInChildren<ITooltipDescriptor>();
-            foreach (ITooltipDescriptor td in descriptors)
+            //Create Descriptor structs
+            IDescriptorCreator[] descriptorCreators = prefab.GetComponentsInChildren<IDescriptorCreator>();
+            Descriptor[] descriptors = new Descriptor[descriptorCreators.Length];
+            for (int i = 0; i < descriptorCreators.Length; i++)
             {
-                string desc = td.CreateDescription();
-                if (!desc.EndsWith("\n"))
-                    desc += "\n";
-                TooltipText += desc;
+                var td = descriptorCreators[i];
+                Descriptor desc = td.CreateDescription();
+                if (!desc.text.EndsWith("\n"))
+                    desc.text += "\n";
+
+                descriptors[i] = desc;
+            }
+
+            //Sort: 1st according to group 2nd in-group priority
+            descriptors = descriptors.OrderBy(x => x.group).ThenBy(x => x.priority).ToArray();
+            string TooltipText = "";
+            for (int i = 0; i < descriptorCreators.Length; i++)
+            {
+                Debug.Log(descriptors[i].group + "  " + descriptors[i].priority);
+                TooltipText += descriptors[i].text;
             }
 
             EventTrigger trigger = b.GetComponent<EventTrigger>();

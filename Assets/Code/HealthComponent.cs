@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class HealthComponent : MonoBehaviour, ITooltipDescriptor
+public class HealthComponent : MonoBehaviour, IDescriptorCreator
 {
     [SerializeField]
     private int currentHealth = 1;
@@ -50,7 +50,7 @@ public class HealthComponent : MonoBehaviour, ITooltipDescriptor
         if (CurrentHealth <= 0)
         {
             Destroy(this.gameObject);
-                        
+
         }
     }
 
@@ -68,8 +68,13 @@ public class HealthComponent : MonoBehaviour, ITooltipDescriptor
         MaxHealthChangedEvent = null;
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "<style=Stats>Max HP: " + MaxHealth + "</style>";
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 0,
+            text = "<style=Stats>Max HP: " + MaxHealth + "</style>"
+        };
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 //Class representing building component
 //Used for registering buildings in building UI
-public class Building : MonoBehaviour, ITargetable, INotifyDestroy, ITooltipDescriptor
+public class Building : MonoBehaviour, ITargetable, INotifyDestroy, IDescriptorCreator
 {
     public string description = "Blah Blash";
 
@@ -30,6 +30,7 @@ public class Building : MonoBehaviour, ITargetable, INotifyDestroy, ITooltipDesc
             team = value;
         }
     }
+
 
     public event Action<ITargetable> TargetNoLongerValid;
     public event Action<INotifyDestroy> WillBeDestroyed;
@@ -67,8 +68,13 @@ public class Building : MonoBehaviour, ITargetable, INotifyDestroy, ITooltipDesc
         return true;
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "<style=\"Heading\">" + name + "</style>\n" + "<style=\"Description\">" + description + "</style>\n";
+        return new Descriptor
+        {
+            group = DescriptorGroup.GENERAL,
+            priority = 0,
+            text = "<style=\"Heading\">" + name + "</style>\n" + "<style=\"Description\">" + description + "</style>\n"
+        };
     }
 }

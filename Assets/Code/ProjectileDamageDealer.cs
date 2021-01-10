@@ -6,7 +6,7 @@ using System;
 //Shoots projectiles at enemies
 //Requirements: ProjectilePrefab must have a Projectile Component
 [RequireComponent(typeof(SingleTargetAcquisition))]
-public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDescriptor
+public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorCreator
 {
     public GameObject projectilePrefab;
     public int Damage;
@@ -60,8 +60,13 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDesc
         Gizmos.DrawSphere(transform.position + arrowOrigin, 0.1f);
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "<style=Stats>Damage: " + Damage + "\nProjectile Speed: " + ProjectileSpeed+"</style>";
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 1,
+            text = "<style=Stats>Damage: " + Damage + "\nProjectile Speed: " + ProjectileSpeed + "</style>"
+        };
     }
 }

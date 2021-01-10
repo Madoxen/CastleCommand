@@ -4,7 +4,7 @@ using System;
 
 
 //Triggers damage dealer upon timer completion 
-public class TimedDamageDealerBase : MonoBehaviour, ITooltipDescriptor
+public class TimedDamageDealerBase : MonoBehaviour, IDescriptorCreator
 {
     [SerializeField]
     private float cooldown;
@@ -33,8 +33,14 @@ public class TimedDamageDealerBase : MonoBehaviour, ITooltipDescriptor
         }
     }
 
-    public string CreateDescription()
+    public Descriptor CreateDescription()
     {
-        return "<style=Stats>Attack Cooldown: " + Cooldown+"</style>";
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 2,
+            text = "<style=Stats>Attack Cooldown: " + Cooldown + "</style>"
+        };
+
     }
 }
