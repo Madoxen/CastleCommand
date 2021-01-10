@@ -56,6 +56,17 @@ class CostBuildingRule : MonoBehaviour, IBuildingRule, IDescriptorCreator
             text = t,
         };
     }
+
+    public string CreateDescription()
+    {
+        string result = "";
+        foreach (ResourceCost rc in resourceCosts)
+        {
+            StrategicResource r = rc.resource;
+            result += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
+        }
+        return result;
+    }
 }
 
 [Serializable]
