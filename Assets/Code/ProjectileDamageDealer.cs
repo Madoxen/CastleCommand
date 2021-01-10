@@ -62,6 +62,6 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDesc
 
     public string CreateDescription()
     {
-        return "Damage: " + Damage + "\nProjectile Speed: " + ProjectileSpeed;
+        return "<style=Stats>Damage: " + Damage + "\nProjectile Speed: " + ProjectileSpeed+"</style>";
     }
 }

@@ -76,6 +76,6 @@ public class PlaceOnNodeBuildingRule : MonoBehaviour, IBuildingRule, ITooltipDes
     public string CreateDescription()
     {
         //TODO: change to icon
-        return "Needs to be placed on" + requiredResource.Name + "resource node";
+        return "<style=Warning>Needs to be placed on <sprite=\"GameIcons\" name=\"" + requiredResource.icon.name + "\"/> resource node</style>";
     }
 }

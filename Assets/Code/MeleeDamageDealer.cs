@@ -41,6 +41,6 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer, ITooltipDescripto
 
     public string CreateDescription()
     {
-        return "Damage: " + damage + "\nRange: " + range;
+        return "<style=Stats>Damage: " + damage + "\nRange: " + range + "</style>";
     }
 }

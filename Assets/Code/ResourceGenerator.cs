@@ -31,6 +31,6 @@ public class ResourceGenerator : MonoBehaviour, ITooltipDescriptor
 
     public string CreateDescription()
     {
-        return "Generates " + generatedResource.Name + " " + amount + " / " + speed + "s";
+        return "<style=Stats>Generates <sprite=\"GameIcons\" name=\"" + generatedResource.icon.name + "\"/> " + amount + " / " + speed + "s</style>";
     }
 }

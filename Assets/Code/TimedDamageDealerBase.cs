@@ -35,6 +35,6 @@ public class TimedDamageDealerBase : MonoBehaviour, ITooltipDescriptor
 
     public string CreateDescription()
     {
-        return "Attack Cooldown: " + Cooldown;
+        return "<style=Stats>Attack Cooldown: " + Cooldown+"</style>";
     }
 }

@@ -69,6 +69,6 @@ public class Building : MonoBehaviour, ITargetable, INotifyDestroy, ITooltipDesc
 
     public string CreateDescription()
     {
-        return "<style=\"H1\">" + name + "</style>\n" + "<style=\"Quote\">" + description + "</style>\n<style=H2>";
+        return "<style=\"Heading\">" + name + "</style>\n" + "<style=\"Description\">" + description + "</style>\n";
     }
 }

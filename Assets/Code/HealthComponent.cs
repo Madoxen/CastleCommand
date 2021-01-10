@@ -70,6 +70,6 @@ public class HealthComponent : MonoBehaviour, ITooltipDescriptor
 
     public string CreateDescription()
     {
-        return "Max HP: " + MaxHealth;
+        return "<style=Stats>Max HP: " + MaxHealth + "</style>";
     }
 }
