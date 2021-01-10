@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class HealthComponent : MonoBehaviour
+public class HealthComponent : MonoBehaviour, ITooltipDescriptor
 {
     [SerializeField]
     private int currentHealth = 1;
@@ -66,5 +66,10 @@ public class HealthComponent : MonoBehaviour
         //Unsubscribe everyone from events
         HealthChangedEvent = null;
         MaxHealthChangedEvent = null;
+    }
+
+    public string CreateDescription()
+    {
+        return "Max HP: " + MaxHealth;
     }
 }

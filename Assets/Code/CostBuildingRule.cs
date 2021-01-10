@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 
-public class CostBuildingRule : MonoBehaviour, IBuildingRule
+public class CostBuildingRule : MonoBehaviour, IBuildingRule, ITooltipDescriptor
 {
     public List<ResourceCost> resourceCosts = new List<ResourceCost>();
     private Builder builder;
@@ -38,6 +38,17 @@ public class CostBuildingRule : MonoBehaviour, IBuildingRule
 
     public void Dispose()
     {
+    }
+
+    public string CreateDescription()
+    {
+        string result = "";
+        foreach (ResourceCost rc in resourceCosts)
+        {
+            StrategicResource r = rc.resource;
+            result += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
+        }
+        return result;
     }
 }
 

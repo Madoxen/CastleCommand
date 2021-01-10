@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 
 
 //Class representing building component
 //Used for registering buildings in building UI
-public class Building : MonoBehaviour, ITargetable, INotifyDestroy
+public class Building : MonoBehaviour, ITargetable, INotifyDestroy, ITooltipDescriptor
 {
     public string description = "Blah Blash";
 
@@ -57,12 +58,17 @@ public class Building : MonoBehaviour, ITargetable, INotifyDestroy
         EntityRegister.Buildings.Remove(this);
         TargetNoLongerValid?.Invoke(this);
         WillBeDestroyed?.Invoke(this);
-        WillBeDestroyed = null; 
+        WillBeDestroyed = null;
         TargetNoLongerValid = null;
     }
 
     public bool IsValidTarget()
     {
         return true;
+    }
+
+    public string CreateDescription()
+    {
+        return "<style=\"H1\">" + name + "</style>\n" + "<style=\"Quote\">" + description + "</style>\n<style=H2>";
     }
 }
