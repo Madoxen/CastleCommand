@@ -33,7 +33,7 @@ public class BuildingGhost : MonoBehaviour
     private MasterInput input;
     private MeshRenderer Renderer;
     private int mask;
-    public event Action<Collider> CollisionStayed;
+    public bool moveable = true;
 
     private void Awake()
     {
@@ -47,14 +47,14 @@ public class BuildingGhost : MonoBehaviour
 
     private void OnMouseMovePerformed(InputAction.CallbackContext context)
     {
-
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         //Raycast against the terrain
         //256 -> 10000000 8th bit
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
         {
             Debug.DrawLine(ray.origin, hit.point);
-            this.transform.position = hit.point;
+            if(moveable)
+                this.transform.position = hit.point;
         }
         else
         {
@@ -72,9 +72,4 @@ public class BuildingGhost : MonoBehaviour
         input.Builder.MouseMove.Disable();
     }
 
-
-    private void OnTriggerStay(Collider other)
-    {
-        CollisionStayed?.Invoke(other);
-    }
 }

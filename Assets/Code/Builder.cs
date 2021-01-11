@@ -47,8 +47,8 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     {
         if (CurrentBuildingPrefab != null && ghost.IsValid)
         {
-            Build(transform.position);
-            currentBuildingRules?.ForEach(x => x.AfterBuildEffect());
+            GameObject newBuilding = Build(transform.position);
+            currentBuildingRules?.ForEach(x => x.AfterBuildEffect(newBuilding));
             AS.Play();
         }
     }
@@ -61,13 +61,14 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
     private void FixedUpdate()
     {
+        
         if (currentBuildingRules != null)
         {
-            ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid()); //so this is REALLY bad, todo: change into event driven architecture?
+            ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid());
         }
         else
             ghost.IsValid = true;
-        
+
     }
 
     private void OnEnable()
@@ -105,10 +106,11 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     }
 
     //Instantiate currentBuildingPrefab at given position
-    private void Build(Vector3 worldCoords)
+    private GameObject Build(Vector3 worldCoords)
     {
         GameObject building = Instantiate(CurrentBuildingPrefab, worldCoords, Quaternion.identity);
         building.GetComponents<IBuildingRule>().ToList().ForEach(x => Destroy((MonoBehaviour)x)); //we dont want building rules on already built buildings
+        return building;
     }
 
 }

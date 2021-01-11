@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(ITargetAcquisition))]
-public class MeleeDamageDealer : MonoBehaviour, IDamageDealer
+public class MeleeDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorCreator
 {
     public event Action<object> Attacked;
     public float range;
@@ -28,8 +28,8 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer
             if (Vector3.Distance(target.transform.position, this.transform.position) < range)
             {
                 target.GetComponent<HealthComponent>().CurrentHealth -= damage;
+                Attacked?.Invoke(this);
             }
-            Attacked?.Invoke(this);
         }
 
     }
@@ -39,4 +39,13 @@ public class MeleeDamageDealer : MonoBehaviour, IDamageDealer
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    public Descriptor CreateDescription()
+    {
+        return new Descriptor
+        {
+            group = DescriptorGroup.STATS,
+            priority = 1,
+            text = "<Style=Stats>Damage: " + damage + "\nRange: " + range + "</style>"
+        };
+    }
 }

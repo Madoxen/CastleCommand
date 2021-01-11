@@ -5,12 +5,12 @@ using System;
 using System.Linq;
 
 
-public class CostBuildingRule : MonoBehaviour, IBuildingRule
+class CostBuildingRule : MonoBehaviour, IBuildingRule, IDescriptorCreator
 {
     public List<ResourceCost> resourceCosts = new List<ResourceCost>();
     private Builder builder;
 
-    public void AfterBuildEffect()
+    public void AfterBuildEffect(GameObject newBuilding)
     {
         foreach (ResourceCost c in resourceCosts)
         {
@@ -38,6 +38,24 @@ public class CostBuildingRule : MonoBehaviour, IBuildingRule
 
     public void Dispose()
     {
+
+    }
+
+    public Descriptor CreateDescription()
+    {
+        string t = "";
+        foreach (ResourceCost rc in resourceCosts)
+        {
+            StrategicResource r = rc.resource;
+            t += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> :" + rc.amount + "\n";
+        }
+
+        return new Descriptor
+        {
+            group = DescriptorGroup.COST,
+            priority = 0,
+            text = t,
+        };
     }
 }
 

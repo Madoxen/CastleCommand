@@ -7,10 +7,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private ScenarioSC scenario;
-    public ScenarioSC Scenario
+    private ScenarioSC scenarioSC;
+    public ScenarioSC ScenarioSC
     {
-        get { return scenario; }
+        get { return scenarioSC; }
     }
 
 
@@ -21,14 +21,10 @@ public class EnemySpawner : MonoBehaviour
         get { return enemyListSC; }
     }
 
-    public float spawnCooldown = 60f;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(scenarioSC);
         StartCoroutine(SpawnEnemy());
     }
 
@@ -49,9 +45,8 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemy() 
     {
-        foreach (var wave in scenario.Waves)
+        foreach (var wave in scenarioSC.Waves)
         {
-            Debug.Log(wave);
             var enemies = EnemyKnapsack.MakeVawe(wave.Budget,enemyListSC.Pricing);
             foreach (var enemy in enemies)
             {

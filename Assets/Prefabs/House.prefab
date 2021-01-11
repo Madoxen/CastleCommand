@@ -186,6 +186,8 @@ MonoBehaviour:
   resourceCosts:
   - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
     amount: 100
+  - resource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
+    amount: 25
 --- !u!1001 &9084527598234033512
 PrefabInstance:
   m_ObjectHideFlags: 0
