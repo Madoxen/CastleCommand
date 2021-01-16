@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainBuilding : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class MainBuilding : MonoBehaviour
     private void OnDestroy()
     {
         //GameOverText.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
