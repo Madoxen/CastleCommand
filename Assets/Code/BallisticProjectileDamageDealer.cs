@@ -121,7 +121,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             return x / (Mathf.Cos(angle) * v);
         }
 
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + arrowOrigin;
         while (time < simulationMaxTime)
         {
             //Guess next position
@@ -133,7 +133,6 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             targetpos = predictedPos;
             //Factor position on relative vertical 2D plane
             //We take our point as (0,0)
-            Debug.Log(new Vector3(targetDir.x, 0, targetDir.z).magnitude);
             float? angle = optimal(new Vector3(targetDir.x, 0, targetDir.z).magnitude, targetDir.y, projectileSpeed);
             
             Debug.Log(angle * Mathf.Rad2Deg);

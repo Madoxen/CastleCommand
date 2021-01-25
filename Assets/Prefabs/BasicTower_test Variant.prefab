@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2047059120960185488, guid: dbbb665afc09c804885901f067639a6a,
     type: 3}
-  Damage: 10
+  Damage: 4
   arrowOrigin: {x: 0, y: 1, z: 0}
   projectileSpeed: 10
 --- !u!1001 &1971805774105848032
@@ -103,6 +103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231030901946506656, guid: 69a97cd45f9f0d445a2d137f9d3915c5,
+        type: 3}
+      propertyPath: cooldown
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4465514952253241349, guid: 69a97cd45f9f0d445a2d137f9d3915c5, type: 3}
