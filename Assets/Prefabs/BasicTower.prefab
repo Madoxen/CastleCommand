@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7780213769010062983}
   - component: {fileID: 8700570924773505849}
   - component: {fileID: 4583308770889887969}
-  - component: {fileID: 4465514952253241349}
   - component: {fileID: 8231030901946506656}
   - component: {fileID: 212003361629826449}
   - component: {fileID: 2338481861309722258}
+  - component: {fileID: 1023936195415123114}
   m_Layer: 0
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -47,7 +47,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4583308770889887969
 MonoBehaviour:
@@ -62,23 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTeamID: 1
---- !u!114 &4465514952253241349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2713683593968100530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8b66b450e7e9a240abe70a5e89369b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 8828645767871829380, guid: e0702c34ec624434c9a54d772d4f1c0c,
-    type: 3}
-  Damage: 5
-  ProjectileSpeed: 12
-  arrowOrigin: {x: 0, y: 1, z: 0}
 --- !u!114 &8231030901946506656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +185,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PitchHigherBound: 0.8
   PitchLowerBound: 1.2
+--- !u!114 &1023936195415123114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713683593968100530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318fd945eb7185941b5c0c5fcb522dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2047059120960185488, guid: dbbb665afc09c804885901f067639a6a,
+    type: 3}
+  Damage: 5
+  arrowOrigin: {x: 0, y: 1, z: 0}
+  projectileSpeed: 12
 --- !u!1 &8201309680920237664
 GameObject:
   m_ObjectHideFlags: 0

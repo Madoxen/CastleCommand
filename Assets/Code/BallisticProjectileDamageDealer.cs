@@ -138,7 +138,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             Debug.Log(angle * Mathf.Rad2Deg);
             if (angle != null)
             {
-                float ttime = travelTime(targetDir.x, (float)angle, projectileSpeed);
+                float ttime = travelTime(new Vector3(targetDir.x, 0, targetDir.z).magnitude, (float)angle, projectileSpeed);
                 if (ttime < time)
                 {
                     return ((float)angle * Mathf.Rad2Deg, pitch);
