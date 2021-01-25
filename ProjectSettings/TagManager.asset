@@ -19,8 +19,8 @@ TagManager:
   - Enemies
   - Buildings
   - StrategicResourceNodes
-  - PlayerProjectiles
-  - EnemyProjectiles
+  - Projectiles
+  - 
   - 
   - 
   - 

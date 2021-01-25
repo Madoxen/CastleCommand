@@ -61,7 +61,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             debugNormal = normal;
 
             Vector3 targetDir = v2; targetDir.y = 0; targetDir.Normalize();
-            targetDir = Quaternion.AngleAxis(angles.Value.Item1, normal) * targetDir;
+            targetDir = Quaternion.AngleAxis(-angles.Value.Item1, normal) * targetDir;
             targetDir.Normalize();
 
             projectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;//Quaternion.AngleAxis(angles.Value.Item1, transform.right) * ;
@@ -121,19 +121,20 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             return x / (Mathf.Cos(angle) * v);
         }
 
-        Vector3 origin = transform.position; //+ arrowOrigin;
+        Vector3 origin = transform.position;
         while (time < simulationMaxTime)
         {
             //Guess next position
-            Vector3 predictedPos = tpos + tvel * time;
+            Vector3 predictedPos = tpos + (tvel * time);
             //Get pitch angle
             Vector3 targetDir = predictedPos - origin;
+ 
             float pitch = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
             targetpos = predictedPos;
             //Factor position on relative vertical 2D plane
             //We take our point as (0,0)
-
-            float? angle = optimal(targetDir.x, targetDir.y, projectileSpeed);
+            Debug.Log(new Vector3(targetDir.x, 0, targetDir.z).magnitude);
+            float? angle = optimal(new Vector3(targetDir.x, 0, targetDir.z).magnitude, targetDir.y, projectileSpeed);
             
             Debug.Log(angle * Mathf.Rad2Deg);
             if (angle != null)

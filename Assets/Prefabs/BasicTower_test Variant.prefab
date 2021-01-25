@@ -39,6 +39,11 @@ PrefabInstance:
       propertyPath: resourceCosts.Array.data[0].amount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7780213769010062983, guid: 69a97cd45f9f0d445a2d137f9d3915c5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8201309680920237664, guid: 69a97cd45f9f0d445a2d137f9d3915c5,
         type: 3}
       propertyPath: m_Name
