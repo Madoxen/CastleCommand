@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1752782931476325367}
   - component: {fileID: -7254875616947532109}
   - component: {fileID: -4215563164603938174}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4367779, y: 0.09939418, z: 0.09935543}
-  m_Center: {x: 0.02838894, y: 0.00027772784, z: -0.00070302375}
+  m_Size: {x: 0.09939418, y: 0.09935543, z: 0.4367779}
+  m_Center: {x: 0.00027771667, y: 0.00070302375, z: -0.02838894}
 --- !u!96 &1752782931476325367
 TrailRenderer:
   serializedVersion: 2
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
+  isSticky: 1
 --- !u!54 &-4215563164603938174
 Rigidbody:
   m_ObjectHideFlags: 0

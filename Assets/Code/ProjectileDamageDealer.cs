@@ -48,7 +48,7 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorC
         if (ta.CurrentAttackTarget is MonoBehaviour target && col.gameObject == target.gameObject)
         {
             target.GetComponent<HealthComponent>().CurrentHealth -= Damage;
-            Destroy(p.gameObject);
+            p.AfterHit(col);
         }
     }
 
