@@ -146,7 +146,6 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             }
             time += step;
         }
-
         return null;
     }
 
