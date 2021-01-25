@@ -8,8 +8,10 @@ public class Projectile : MonoBehaviour
     public Action<Projectile, Collider> HitCallback;
     public float lifetime = 5f;
     public bool isSticky = false;
+    public bool isBallistic = false;
     private Rigidbody r;
     private int terrainLayer;
+
 
     private void Awake()
     {
@@ -21,6 +23,13 @@ public class Projectile : MonoBehaviour
     {
         Invoke(nameof(Die), lifetime);
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (isBallistic && r.velocity.magnitude > 0.001)
+            transform.rotation = Quaternion.LookRotation(r.velocity.normalized);
+        
     }
 
     private void OnTriggerEnter(Collider col)
