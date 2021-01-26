@@ -16,10 +16,20 @@ public class SingleTargetAcquisition : MonoBehaviour, ITargetAcquisition
         private set { currentAttackTarget = value; TargetAcquired?.Invoke(CurrentAttackTarget); }
     }
 
+    public float DetectionRadius
+    {
+        get { return sc.radius; }
+    }
+
     private List<ITargetable> availableTargets = new List<ITargetable>();
     public event Action<ITargetable> TargetAcquired;
     public int targetTeamID = 0;
+    private SphereCollider sc;
 
+    private void Start()
+    {
+        sc = GetComponent<SphereCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
