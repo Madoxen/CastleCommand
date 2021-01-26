@@ -3,9 +3,9 @@ using System.Collections;
 using System;
 
 //Projectile associated with damage dealer
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IProjectile
 {
-    public Action<Projectile, Collider> HitCallback;
+    public Action<IProjectile, Collider> HitCallback { get; set; }
     public float lifetime = 5f;
     public bool isSticky = false;
     public bool isBallistic = false;
