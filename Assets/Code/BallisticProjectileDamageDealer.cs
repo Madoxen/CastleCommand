@@ -41,7 +41,10 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             targetV = agent.velocity;
 
 
-        (float, float)? angles = SolveBallistics(target.transform.position, targetV);
+        Collider c = target.GetComponent<Collider>();
+        Vector3 center = c != null ? c.bounds.center - target.transform.position: Vector3.zero;
+
+        (float, float)? angles = SolveBallistics(target.transform.position + center, targetV);
         if (angles != null) {
             GameObject projectile = Instantiate(projectilePrefab, arrowOrigin + transform.position, Quaternion.identity);
 
@@ -148,10 +151,6 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
         }
         return null;
     }
-
-
-
-
 
 
     void OnDrawGizmosSelected()
