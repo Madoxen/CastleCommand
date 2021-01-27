@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8743901439151459062}
   - component: {fileID: 8743901439151459063}
   - component: {fileID: 8743901439151459060}
-  - component: {fileID: 8743901439151459061}
   - component: {fileID: -830665579894980173}
   m_Layer: 0
   m_Name: Spawner
@@ -81,21 +80,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8743901439151459058}
   m_Mesh: {fileID: 5993301732453089435, guid: d65ddb4d7ed98334dbd8cce27d31d1c3, type: 3}
---- !u!114 &8743901439151459061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8743901439151459058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88cdbaea66e464419075cc1d466dd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scenarioSC: {fileID: 11400000, guid: b28081ad7c0692887877b3d1b1b69a0c, type: 2}
-  enemyListSC: {fileID: 11400000, guid: ae71a9f1c652f624b824a954d59a8057, type: 2}
-  spawnCooldown: 60
 --- !u!65 &-830665579894980173
 BoxCollider:
   m_ObjectHideFlags: 0

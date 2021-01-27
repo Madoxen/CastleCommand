@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - Budget: 0
-    Time: 30
+    Time: 72
   - Budget: 100
-    Time: 60
+    Time: 10
   - Budget: 200
-    Time: 60
+    Time: 10
   - Budget: 300
-    Time: 60
+    Time: 10
   - Budget: 600
     Time: 60
   - Budget: 1000
