@@ -31,7 +31,8 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorC
 
         Vector3 dir = ((transform.position + arrowOrigin) - target.transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, arrowOrigin + transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().HitCallback = OnProjectileHit;
+        projectile.GetComponent<IProjectile>().HitCallback = OnProjectileHit;
+        projectile.GetComponent<IProjectile>().TargetedTeam = ta.CurrentAttackTarget.Team;
         projectile.transform.LookAt(target.transform.position);
         projectile.GetComponent<Rigidbody>().velocity = -dir * ProjectileSpeed;
         Attacked?.Invoke(this);
@@ -43,7 +44,7 @@ public class ProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDescriptorC
     }
 
 
-    public void OnProjectileHit(Projectile p, Collider col)
+    public void OnProjectileHit(IProjectile p, Collider col)
     {
         if (ta.CurrentAttackTarget is MonoBehaviour target && col.gameObject == target.gameObject)
         {

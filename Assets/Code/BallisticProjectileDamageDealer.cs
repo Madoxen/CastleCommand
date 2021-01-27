@@ -47,7 +47,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
         (float, float)? angles = SolveBallistics(target.transform.position + center, targetV);
         if (angles != null) {
             GameObject projectile = Instantiate(projectilePrefab, arrowOrigin + transform.position, Quaternion.identity);
-
+            
             //We have 3 points
             //Tower base
             //tower arrow origin
@@ -67,9 +67,10 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             targetDir = Quaternion.AngleAxis(-angles.Value.Item1, normal) * targetDir;
             targetDir.Normalize();
 
-            projectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;//Quaternion.AngleAxis(angles.Value.Item1, transform.right) * ;
+            projectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;
             debugVel = projectile.GetComponent<Rigidbody>().velocity;
-            projectile.GetComponent<Projectile>().HitCallback = OnProjectileHit;
+            projectile.GetComponent<IProjectile>().HitCallback = OnProjectileHit;
+            projectile.GetComponent<IProjectile>().TargetedTeam = ta.CurrentAttackTarget.Team;
         }
 
 
@@ -80,7 +81,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
     }
 
 
-    public void OnProjectileHit(Projectile p, Collider col)
+    public void OnProjectileHit(IProjectile p, Collider col)
     {
         if (ta.CurrentAttackTarget is MonoBehaviour target && col.gameObject == target.gameObject)
         {
@@ -90,7 +91,6 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
     }
 
     //Solves ballistics in 2D, for 3D ballistics pitch the angle in future target direction
-    //Note that this method will not yield results for lateral movement, (but our enemies dont do lateral very often)
     //Returns tuple of floats -> vertical angle, and horizontal angle in degrees
     //Returns null if no solution was found
     (float, float)? SolveBallistics(Vector3 tpos, Vector3 tvel)
