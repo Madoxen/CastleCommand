@@ -80,7 +80,6 @@ public class BuildingScreenSupplier : MonoBehaviour
             string TooltipText = "";
             for (int i = 0; i < descriptorCreators.Length; i++)
             {
-                Debug.Log(descriptors[i].group + "  " + descriptors[i].priority);
                 TooltipText += descriptors[i].text;
             }
 

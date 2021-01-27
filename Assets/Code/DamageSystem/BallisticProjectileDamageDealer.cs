@@ -138,7 +138,6 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             //We take our point as (0,0)
             float? angle = optimal(new Vector3(targetDir.x, 0, targetDir.z).magnitude, targetDir.y, projectileSpeed);
             
-            Debug.Log(angle * Mathf.Rad2Deg);
             if (angle != null)
             {
                 float ttime = travelTime(new Vector3(targetDir.x, 0, targetDir.z).magnitude, (float)angle, projectileSpeed);
