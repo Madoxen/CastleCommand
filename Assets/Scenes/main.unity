@@ -3854,3 +3854,4 @@ MonoBehaviour:
   buttonPrefab: {fileID: 7847354750916960248, guid: 27dcdbfc9e529ff44b08e77556fc3286,
     type: 3}
   builder: {fileID: 505319590}
+  destroyer: {fileID: 1430261314}
