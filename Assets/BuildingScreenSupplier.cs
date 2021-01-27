@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +48,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             Destroy(child);
         }
 
-        for(int i = 0; i < (8-sc.prefabList.Count) ; i++)
+        for(int i = 0; i < (5-sc.prefabList.Count) ; i++)
         {
             
             GameObject placeholder = Instantiate(TilePrefab, this.transform);
