@@ -1970,8 +1970,9 @@ MonoBehaviour:
   maxHeight: 8
   minHeight: 2
   speed: 2
-  zoomingSpeed: 0.5
-  moveAllowed: 0
+  zoomingSpeed: 0.01
+  rotationSpeed: 0.05
+  expansion: 0.01
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1984,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674df60b2d9b16b4e8796c5643ce4253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.1
 --- !u!1001 &1012132339
 PrefabInstance:
   m_ObjectHideFlags: 0

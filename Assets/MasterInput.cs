@@ -49,6 +49,22 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""6f5580b4-a431-4958-9120-f54ab85f7f5f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateAllowed"",
+                    ""type"": ""Button"",
+                    ""id"": ""85ab6005-3a19-4cc4-8a7b-06e744f87532"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -216,6 +232,28 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""action"": ""KeyboardMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""015d3bf0-0438-4c60-962d-361bd2cb5076"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RotateAllowed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d477ef8-6ce3-4cb1-87b9-7e91e0549124"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -925,6 +963,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_Camera_MoveAllowed = m_Camera.FindAction("MoveAllowed", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         m_Camera_KeyboardMove = m_Camera.FindAction("KeyboardMove", throwIfNotFound: true);
+        m_Camera_Rotate = m_Camera.FindAction("Rotate", throwIfNotFound: true);
+        m_Camera_RotateAllowed = m_Camera.FindAction("RotateAllowed", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1000,6 +1040,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Camera_MoveAllowed;
     private readonly InputAction m_Camera_Zoom;
     private readonly InputAction m_Camera_KeyboardMove;
+    private readonly InputAction m_Camera_Rotate;
+    private readonly InputAction m_Camera_RotateAllowed;
     public struct CameraActions
     {
         private @MasterInput m_Wrapper;
@@ -1008,6 +1050,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         public InputAction @MoveAllowed => m_Wrapper.m_Camera_MoveAllowed;
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
         public InputAction @KeyboardMove => m_Wrapper.m_Camera_KeyboardMove;
+        public InputAction @Rotate => m_Wrapper.m_Camera_Rotate;
+        public InputAction @RotateAllowed => m_Wrapper.m_Camera_RotateAllowed;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1029,6 +1073,12 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @KeyboardMove.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnKeyboardMove;
                 @KeyboardMove.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnKeyboardMove;
                 @KeyboardMove.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnKeyboardMove;
+                @Rotate.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @RotateAllowed.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateAllowed;
+                @RotateAllowed.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateAllowed;
+                @RotateAllowed.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateAllowed;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -1045,6 +1095,12 @@ public class @MasterInput : IInputActionCollection, IDisposable
                 @KeyboardMove.started += instance.OnKeyboardMove;
                 @KeyboardMove.performed += instance.OnKeyboardMove;
                 @KeyboardMove.canceled += instance.OnKeyboardMove;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @RotateAllowed.started += instance.OnRotateAllowed;
+                @RotateAllowed.performed += instance.OnRotateAllowed;
+                @RotateAllowed.canceled += instance.OnRotateAllowed;
             }
         }
     }
@@ -1303,6 +1359,8 @@ public class @MasterInput : IInputActionCollection, IDisposable
         void OnMoveAllowed(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnKeyboardMove(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+        void OnRotateAllowed(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
