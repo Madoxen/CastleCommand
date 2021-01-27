@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor;
 using System;
+using System.Linq;
 
 public class Reparator : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Reparator : MonoBehaviour
 
         camera = Camera.main;
         buildingsLayer = LayerMask.GetMask("Buildings");
-        repairShader = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Yellow.2");
+        repairShader = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Yellow.4");
     }
 
     private void OnMouseMove()
@@ -89,8 +90,19 @@ public class Reparator : MonoBehaviour
     {
         if (lastHit != null)
         {
-            Destroy(lastHit);
-            lastMaterial = null;
+            var hc = lastHit.GetComponent<HealthComponent>();
+            var costList = BuildingPricing.Instance[lastHit.name.Split('(')[0]];
+
+            var resourceCost = costList.Costs.Select(rc => new ResourceCost { resource = rc.resource, amount = (int)(0.8 * rc.amount * (hc.MaxHealth - hc.CurrentHealth) / hc.MaxHealth) });
+
+            if (resourceCost.All(rc => PlayerResources.Instance.Resources.Find(it => it.resource == rc.resource).Amount >= rc.amount))
+            {
+                foreach (var rc in resourceCost)
+                {
+                    PlayerResources.Instance.Resources.Find(it => it.resource == rc.resource).Amount -= rc.amount;
+                    hc.CurrentHealth = hc.MaxHealth;
+                }
+            }
         }
     }
 
@@ -98,11 +110,11 @@ public class Reparator : MonoBehaviour
     {
         builder.CurrentBuildingPrefab = null; //hope that's the right way to turn the builder off
         input.Reparator.Enable();
-        input.Destroyer.Disable();
     }
 
     private void OnDisable()
     {
-        input.Destroyer.Disable();
+
+        input.Reparator.Disable();
     }
 }
