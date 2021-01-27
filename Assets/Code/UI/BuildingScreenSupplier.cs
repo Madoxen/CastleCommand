@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +22,10 @@ public class BuildingScreenSupplier : MonoBehaviour
     private GameObject buttonPrefab; // button prefab that will be used in screen generation
 
     [SerializeField]
-    private Builder builder; //reference to builder object
+    public GameObject TilePrefab;
 
     [SerializeField]
-    private Destroyer destroyer;
+    private Builder builder; //reference to builder object
 
     private void Awake()
     {
@@ -48,18 +48,25 @@ public class BuildingScreenSupplier : MonoBehaviour
             Destroy(child);
         }
 
+        for(int i = 0; i < (5-sc.prefabList.Count) ; i++)
+        {
+            
+            GameObject placeholder = Instantiate(TilePrefab, this.transform);
+            placeholder.transform.SetAsFirstSibling();
+        }
+
         //Add new buttons
         foreach (GameObject prefab in sc.prefabList)
         {
             GameObject button = Instantiate(buttonPrefab, this.transform);
             button.name = "button_build" + prefab.name;
+            button.transform.SetAsFirstSibling();
             //TODO: customize buttons based on prefab
 
             Button b = button.GetComponent<Button>();
             b.onClick.AddListener(() =>
             {
                 builder.CurrentBuildingPrefab = prefab;
-                destroyer.gameObject.SetActive(false);
             });
 
             //Create Descriptor structs
@@ -80,6 +87,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             string TooltipText = "";
             for (int i = 0; i < descriptorCreators.Length; i++)
             {
+                Debug.Log(descriptors[i].group + "  " + descriptors[i].priority);
                 TooltipText += descriptors[i].text;
             }
 
@@ -99,5 +107,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             b.GetComponentInChildren<Text>().text = bld.name;
 
         }
+
+
     }
 }
