@@ -100,6 +100,7 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshCollider.sharedMesh = m;
         ghost.enabled = true;
         renderer.enabled = true;
+        ghost.moveable = true;
 
         currentBuildingRules = buildingPrefab.GetComponents<IBuildingRule>().ToList();
         currentBuildingRules.ForEach(x => x.Init(this));
