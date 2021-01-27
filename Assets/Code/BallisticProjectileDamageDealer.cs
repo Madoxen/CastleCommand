@@ -47,7 +47,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
         (float, float)? angles = SolveBallistics(target.transform.position + center, targetV);
         if (angles != null) {
             GameObject projectile = Instantiate(projectilePrefab, arrowOrigin + transform.position, Quaternion.identity);
-
+            
             //We have 3 points
             //Tower base
             //tower arrow origin
@@ -70,6 +70,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             projectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;
             debugVel = projectile.GetComponent<Rigidbody>().velocity;
             projectile.GetComponent<IProjectile>().HitCallback = OnProjectileHit;
+            projectile.GetComponent<IProjectile>().TargetedTeam = ta.CurrentAttackTarget.Team;
         }
 
 

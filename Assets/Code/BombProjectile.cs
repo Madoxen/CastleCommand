@@ -7,14 +7,15 @@ public class BombProjectile : MonoBehaviour, IProjectile
 {
     public float lifetime = 5f;
     public float explosionRadius = 2f;
-    public float explosionDamage = 10f;
+    public int explosionDamage = 10;
     public bool isBallistic = false;
     private Rigidbody r;
     private ParticleSystem ps;
     private int terrainLayer;
-    
+   
 
     public Action<IProjectile, Collider> HitCallback { get; set; }
+    public Team TargetedTeam { get; set; }
 
     private void Awake()
     {
@@ -32,7 +33,6 @@ public class BombProjectile : MonoBehaviour, IProjectile
     {
         if (isBallistic && r.velocity.magnitude > 0.001)
             transform.rotation = Quaternion.LookRotation(r.velocity.normalized);
-
     }
 
     private void OnTriggerEnter(Collider col)
@@ -44,10 +44,23 @@ public class BombProjectile : MonoBehaviour, IProjectile
     public void AfterHit(Collider col)
     {
         //TODO: explode
+        GetComponentInChildren<VariablePitchClipPlayer>().PlaySound();
         ps.transform.parent = null;
+        ps.transform.localScale = new Vector3(1, 1, 1);
+        ps.transform.localRotation = Quaternion.identity;
         ps.Play();
+        
 
-        Destroy(ps.gameObject, ps.main.duration);
+        Collider[] cs = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider c in cs)
+        {
+            Team t = c.GetComponent<ITeamable>()?.Team;
+            if (t?.TeamID == TargetedTeam?.TeamID)
+            {
+                c.GetComponent<HealthComponent>().CurrentHealth -= explosionDamage;
+            }
+        }
+
         Destroy(this.gameObject);
     }
 

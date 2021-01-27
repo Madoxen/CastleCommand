@@ -6,6 +6,8 @@ using System;
 public class Projectile : MonoBehaviour, IProjectile
 {
     public Action<IProjectile, Collider> HitCallback { get; set; }
+    public Team TargetedTeam { get; set; }
+
     public float lifetime = 5f;
     public bool isSticky = false;
     public bool isBallistic = false;
@@ -29,7 +31,7 @@ public class Projectile : MonoBehaviour, IProjectile
     {
         if (isBallistic && r.velocity.magnitude > 0.001)
             transform.rotation = Quaternion.LookRotation(r.velocity.normalized);
-        
+
     }
 
     private void OnTriggerEnter(Collider col)

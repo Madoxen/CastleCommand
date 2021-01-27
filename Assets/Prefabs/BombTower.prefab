@@ -96,7 +96,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -131,7 +131,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -372,7 +372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceCosts:
   - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
-    amount: 50
+    amount: 100
+  - resource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
+    amount: 200
 --- !u!1001 &6345801053163844683
 PrefabInstance:
   m_ObjectHideFlags: 0
