@@ -93,16 +93,30 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
             return;
         }
 
-        Mesh m = buildingPrefab.GetComponent<MeshFilter>().sharedMesh;
-        //Activate the building ghost
+        //Combine meshes for ghost
+        MeshFilter[] filters = buildingPrefab.GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[filters.Length];
+
+        int i = 0;
+        while (i < filters.Length)
+        {
+            combine[i].mesh = filters[i].sharedMesh;
+            combine[i].transform = filters[i].transform.localToWorldMatrix;
+            i++;
+        }
+
+        Mesh m = new Mesh();
+        m.CombineMeshes(combine);
+
         meshFilter.mesh = m;
         meshCollider.sharedMesh = m;
+        
+
         ghost.enabled = true;
         renderer.enabled = true;
         ghost.moveable = true;
         d.gameObject.SetActive(false);
             
-
         currentBuildingRules = buildingPrefab.GetComponents<IBuildingRule>().ToList();
         currentBuildingRules.ForEach(x => x.Init(this));
     }
@@ -114,5 +128,4 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         building.GetComponents<IBuildingRule>().ToList().ForEach(x => Destroy((MonoBehaviour)x)); //we dont want building rules on already built buildings
         return building;
     }
-
 }

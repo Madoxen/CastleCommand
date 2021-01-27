@@ -16,7 +16,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
     const float gravity = 9.81f;
 
 
-    private Vector3 debugVel;
+    public Vector3 lastVelocity;
     private Vector3 targetpos;
     private Vector3 debugNormal;
     SingleTargetAcquisition ta;
@@ -68,7 +68,7 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
             targetDir.Normalize();
 
             projectile.GetComponent<Rigidbody>().velocity = targetDir * projectileSpeed;
-            debugVel = projectile.GetComponent<Rigidbody>().velocity;
+            lastVelocity = projectile.GetComponent<Rigidbody>().velocity;
             projectile.GetComponent<IProjectile>().HitCallback = OnProjectileHit;
             projectile.GetComponent<IProjectile>().TargetedTeam = ta.CurrentAttackTarget.Team;
         }
@@ -159,9 +159,9 @@ public class BallisticProjectileDamageDealer : MonoBehaviour, IDamageDealer, IDe
         Gizmos.DrawSphere(transform.position + arrowOrigin, 0.1f);
         Gizmos.DrawSphere(targetpos, 0.1f);
         Gizmos.color = new Color(1, 1, 0);
-        Gizmos.DrawRay(transform.position + arrowOrigin, debugVel.normalized * 10f);
+        Gizmos.DrawRay(transform.position + arrowOrigin, lastVelocity.normalized * 10f);
         Gizmos.color = new Color(0, 1, 1);
-        Gizmos.DrawRay(transform.position + arrowOrigin, -debugVel.normalized * 10f);
+        Gizmos.DrawRay(transform.position + arrowOrigin, -lastVelocity.normalized * 10f);
         Gizmos.color = new Color(0, 1, 0);
 
         Vector3 targetDir = targetpos - (arrowOrigin + transform.position);
