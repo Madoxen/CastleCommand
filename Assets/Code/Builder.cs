@@ -25,11 +25,10 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         set { SelectPrefab(value); }
     }
 
-
     // Start is called before the first frame update
     void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
         ghost = GetComponent<BuildingGhost>();
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
@@ -60,15 +59,13 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
 
     private void FixedUpdate()
-    {
-        
+    {    
         if (currentBuildingRules != null)
         {
             ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid());
         }
         else
             ghost.IsValid = true;
-
     }
 
     private void OnEnable()

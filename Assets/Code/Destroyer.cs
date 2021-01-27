@@ -31,7 +31,7 @@ public class Destroyer : MonoBehaviour
 
     private void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
 
         input.Destroyer.ConfirmDelete.performed += _ => OnConfirmDelete();
         input.Destroyer.CancelDelete.performed += _ => OnCancelDelete();

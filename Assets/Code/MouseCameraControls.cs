@@ -18,7 +18,7 @@ public class MouseCameraControls : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
         input.Camera.MoveAllowed.started += MoveAllowed_Started;
         input.Camera.MoveAllowed.canceled += MoveAllowed_Canceled;
     }
