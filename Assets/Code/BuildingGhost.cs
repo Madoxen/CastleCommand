@@ -38,7 +38,7 @@ public class BuildingGhost : MonoBehaviour
     private void Awake()
     {
         mask = 1 << 8;
-        input = new MasterInput();
+        input = MasterInputProvider.input;
         Renderer = GetComponent<MeshRenderer>();
         Renderer.material = ghostMat;
         input.Builder.MouseMove.performed += OnMouseMovePerformed;

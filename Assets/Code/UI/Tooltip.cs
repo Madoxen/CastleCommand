@@ -32,7 +32,7 @@ public class Tooltip : MonoBehaviour
 
         t = GetComponentInChildren<TextMeshProUGUI>();
         rectTransform = GetComponent<RectTransform>();
-        input = new MasterInput();
+        input = MasterInputProvider.input;
         HideTooltip();
     }
 

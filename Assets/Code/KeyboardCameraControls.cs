@@ -12,7 +12,7 @@ public class KeyboardCameraControls : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
     }
 
 
