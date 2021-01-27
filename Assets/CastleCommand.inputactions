@@ -841,6 +841,71 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Reparator",
+            "id": "800eff27-dedc-42ac-81d8-2c9b58f49389",
+            "actions": [
+                {
+                    "name": "MouseMove",
+                    "type": "Button",
+                    "id": "335ce818-bac2-44a2-b45f-1fc392384cf8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CancelRepair",
+                    "type": "Button",
+                    "id": "f0edaaa7-ee49-49af-9ad7-ea39b4f7b253",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ConfirmRepair",
+                    "type": "Button",
+                    "id": "54311fcf-89ff-4213-b19f-e28f14d93023",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6559daac-53f4-420f-b919-89afc64751b0",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ConfirmRepair",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78722e1d-7152-462d-97d2-7dd8d0226034",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CancelRepair",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d68ce7d-1e93-47d4-b5e9-2ac91261a539",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "MouseMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

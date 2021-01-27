@@ -854,6 +854,71 @@ public class @MasterInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Reparator"",
+            ""id"": ""800eff27-dedc-42ac-81d8-2c9b58f49389"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""335ce818-bac2-44a2-b45f-1fc392384cf8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CancelRepair"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0edaaa7-ee49-49af-9ad7-ea39b4f7b253"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ConfirmRepair"",
+                    ""type"": ""Button"",
+                    ""id"": ""54311fcf-89ff-4213-b19f-e28f14d93023"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6559daac-53f4-420f-b919-89afc64751b0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ConfirmRepair"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78722e1d-7152-462d-97d2-7dd8d0226034"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelRepair"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d68ce7d-1e93-47d4-b5e9-2ac91261a539"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""MouseMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -947,6 +1012,11 @@ public class @MasterInput : IInputActionCollection, IDisposable
         m_Destroyer_ConfirmDelete = m_Destroyer.FindAction("ConfirmDelete", throwIfNotFound: true);
         m_Destroyer_CancelDelete = m_Destroyer.FindAction("CancelDelete", throwIfNotFound: true);
         m_Destroyer_MouseMove = m_Destroyer.FindAction("MouseMove", throwIfNotFound: true);
+        // Reparator
+        m_Reparator = asset.FindActionMap("Reparator", throwIfNotFound: true);
+        m_Reparator_MouseMove = m_Reparator.FindAction("MouseMove", throwIfNotFound: true);
+        m_Reparator_CancelRepair = m_Reparator.FindAction("CancelRepair", throwIfNotFound: true);
+        m_Reparator_ConfirmRepair = m_Reparator.FindAction("ConfirmRepair", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1252,6 +1322,55 @@ public class @MasterInput : IInputActionCollection, IDisposable
         }
     }
     public DestroyerActions @Destroyer => new DestroyerActions(this);
+
+    // Reparator
+    private readonly InputActionMap m_Reparator;
+    private IReparatorActions m_ReparatorActionsCallbackInterface;
+    private readonly InputAction m_Reparator_MouseMove;
+    private readonly InputAction m_Reparator_CancelRepair;
+    private readonly InputAction m_Reparator_ConfirmRepair;
+    public struct ReparatorActions
+    {
+        private @MasterInput m_Wrapper;
+        public ReparatorActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseMove => m_Wrapper.m_Reparator_MouseMove;
+        public InputAction @CancelRepair => m_Wrapper.m_Reparator_CancelRepair;
+        public InputAction @ConfirmRepair => m_Wrapper.m_Reparator_ConfirmRepair;
+        public InputActionMap Get() { return m_Wrapper.m_Reparator; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ReparatorActions set) { return set.Get(); }
+        public void SetCallbacks(IReparatorActions instance)
+        {
+            if (m_Wrapper.m_ReparatorActionsCallbackInterface != null)
+            {
+                @MouseMove.started -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnMouseMove;
+                @MouseMove.performed -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnMouseMove;
+                @MouseMove.canceled -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnMouseMove;
+                @CancelRepair.started -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnCancelRepair;
+                @CancelRepair.performed -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnCancelRepair;
+                @CancelRepair.canceled -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnCancelRepair;
+                @ConfirmRepair.started -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnConfirmRepair;
+                @ConfirmRepair.performed -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnConfirmRepair;
+                @ConfirmRepair.canceled -= m_Wrapper.m_ReparatorActionsCallbackInterface.OnConfirmRepair;
+            }
+            m_Wrapper.m_ReparatorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MouseMove.started += instance.OnMouseMove;
+                @MouseMove.performed += instance.OnMouseMove;
+                @MouseMove.canceled += instance.OnMouseMove;
+                @CancelRepair.started += instance.OnCancelRepair;
+                @CancelRepair.performed += instance.OnCancelRepair;
+                @CancelRepair.canceled += instance.OnCancelRepair;
+                @ConfirmRepair.started += instance.OnConfirmRepair;
+                @ConfirmRepair.performed += instance.OnConfirmRepair;
+                @ConfirmRepair.canceled += instance.OnConfirmRepair;
+            }
+        }
+    }
+    public ReparatorActions @Reparator => new ReparatorActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1328,5 +1447,11 @@ public class @MasterInput : IInputActionCollection, IDisposable
         void OnConfirmDelete(InputAction.CallbackContext context);
         void OnCancelDelete(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
+    }
+    public interface IReparatorActions
+    {
+        void OnMouseMove(InputAction.CallbackContext context);
+        void OnCancelRepair(InputAction.CallbackContext context);
+        void OnConfirmRepair(InputAction.CallbackContext context);
     }
 }
