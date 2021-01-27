@@ -48,7 +48,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             Destroy(child);
         }
 
-        for(int i = 0; i < (5-sc.prefabList.Count) ; i++)
+        for(int i = 0; i < (4-sc.prefabList.Count) ; i++)
         {
             
             GameObject placeholder = Instantiate(TilePrefab, this.transform);

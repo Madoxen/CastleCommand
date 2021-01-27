@@ -90,7 +90,7 @@ public class Reparator : MonoBehaviour
 
     private void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
 
         input.Reparator.ConfirmRepair.performed += _ => OnConfirmRepair();
         input.Reparator.CancelRepair.performed += _ => OnCancelRepair();
