@@ -25,11 +25,68 @@ public class Reparator : MonoBehaviour
         }
     }
 
-    GameObject lastHit;
+    GameObject _lastHit;
+
+    GameObject lastHit
+    {
+        get => _lastHit;
+        set
+        {
+            if (value is null)
+            {
+                _lastHit = null;
+                lastHitHC.HealthChangedEvent -= OnLastHitHealthChanged;
+                //lastHitHC = null;
+                lastHitRenderer.material = lastMaterial;
+                //lastMaterial = null;
+                //lastHitRenderer = null;
+
+                return;
+            }
+            _lastHit = value;
+            lastHitHC = _lastHit.GetComponent<HealthComponent>();
+            lastHitRenderer = _lastHit.GetComponent<Renderer>();
+            lastMaterial = lastHitRenderer.material;
+            lastHitRenderer.material = repairShader;
+            lastHitCL = BuildingPricing.Instance[lastHit.name.Split('(')[0]].Costs;
+            lastHitHC.HealthChangedEvent += OnLastHitHealthChanged;
+            UpdateTooltip(lastHitHC.CurrentHealth);
+        }
+    }
+
+    private void OnLastHitHealthChanged(object sender, int currentHealth) => UpdateTooltip(currentHealth);
+
+    private void UpdateTooltip(int currentHealth)
+    {
+        if (currentHealth <= 0)
+        {
+            Tooltip.HideTooltip();
+            lastHit = null;
+            return;
+        }
+
+        var resourceCosts = lastHitCL
+                   .Select(rc => new ResourceCost { resource = rc.resource, amount = (int)(0.8 * rc.amount * (lastHitHC.MaxHealth - currentHealth) / lastHitHC.MaxHealth) }).ToList();
+
+        var tooltipText = "Repair cost:\n";
+
+        foreach (ResourceCost rc in resourceCosts)
+        {
+            StrategicResource r = rc.resource;
+            tooltipText += "<sprite=\"GameIcons\" name=\"" + r.icon.name + "\"> : " + rc.amount + "\n";
+        }
+
+        Tooltip.ShowTooltip(tooltipText);
+    }
+
+    HealthComponent lastHitHC;
+    Renderer lastHitRenderer;
+
     Material lastMaterial;
     Material repairShader;
 
     MasterInput input;
+    List<ResourceCost> lastHitCL;
 
     private void Awake()
     {
@@ -56,20 +113,16 @@ public class Reparator : MonoBehaviour
             if (hitObject != lastHit)
             {
                 if (lastHit != null)
-                    lastHit.GetComponent<Renderer>().material = lastMaterial;
+                    lastHit = null;
 
                 lastHit = hitObject;
 
-                lastMaterial = hitObject.GetComponent<Renderer>().material;
-
-                hitObject.GetComponent<Renderer>().material = repairShader;
             }
         }
         else if (lastHit != null)
         {
-            lastHit.GetComponent<Renderer>().material = lastMaterial;
             lastHit = null;
-            lastMaterial = null;
+            Tooltip.HideTooltip();
         }
     }
 
@@ -77,10 +130,7 @@ public class Reparator : MonoBehaviour
     {
         if (lastHit != null)
         {
-            lastHit.GetComponent<Renderer>().material = lastMaterial;
-            lastMaterial = null;
             lastHit = null;
-
         }
 
         gameObject.SetActive(false);

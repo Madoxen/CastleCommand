@@ -2652,6 +2652,7 @@ GameObject:
   - component: {fileID: 1187522755}
   - component: {fileID: 1187522754}
   - component: {fileID: 1187522756}
+  - component: {fileID: 1187522757}
   m_Layer: 0
   m_Name: Singletons/SingleStartScripts
   m_TagString: Untagged
@@ -2701,6 +2702,34 @@ MonoBehaviour:
   Resources:
   - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
     amount: 500
+--- !u!114 &1187522757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187522753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9154462a242672e4eb63976860f2cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingNames:
+  - BasicTower
+  - House
+  - Stone Miner
+  Costs:
+  - Costs:
+    - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+      amount: 50
+  - Costs:
+    - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+      amount: 100
+    - resource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
+      amount: 25
+  - Costs:
+    - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+      amount: 50
 --- !u!1001 &1203346839
 PrefabInstance:
   m_ObjectHideFlags: 0
