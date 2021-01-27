@@ -22,6 +22,9 @@ public class BuildingScreenSupplier : MonoBehaviour
     private GameObject buttonPrefab; // button prefab that will be used in screen generation
 
     [SerializeField]
+    public GameObject TilePrefab;
+
+    [SerializeField]
     private Builder builder; //reference to builder object
 
     private void Awake()
@@ -45,11 +48,19 @@ public class BuildingScreenSupplier : MonoBehaviour
             Destroy(child);
         }
 
+        for(int i = 0; i < (8-sc.prefabList.Count) ; i++)
+        {
+            
+            GameObject placeholder = Instantiate(TilePrefab, this.transform);
+            placeholder.transform.SetAsFirstSibling();
+        }
+
         //Add new buttons
         foreach (GameObject prefab in sc.prefabList)
         {
             GameObject button = Instantiate(buttonPrefab, this.transform);
             button.name = "button_build" + prefab.name;
+            button.transform.SetAsFirstSibling();
             //TODO: customize buttons based on prefab
 
             Button b = button.GetComponent<Button>();
@@ -96,5 +107,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             b.GetComponentInChildren<Text>().text = bld.name;
 
         }
+
+
     }
 }
