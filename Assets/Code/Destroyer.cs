@@ -48,10 +48,10 @@ public class Destroyer : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingsLayer))
         {
+           
             //building gets collored to show it is aimed at
             var hitObject = hit.collider.gameObject;
-
-            if (hitObject != lastHit)
+            if (hitObject != lastHit && hitObject.GetComponent<Building>()?.Team.TeamID == 0)
             {
                 if (lastHit != null)
                     lastHit.GetComponent<Renderer>().material = lastMaterial;
