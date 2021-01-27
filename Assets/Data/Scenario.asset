@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Scenario
   m_EditorClassIdentifier: 
   Waves:
-  - Budget: 50
-    Time: 10
+  - Budget: 0
+    Time: 72
   - Budget: 100
     Time: 10
   - Budget: 200
