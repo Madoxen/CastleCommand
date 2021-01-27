@@ -17,6 +17,8 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     private new MeshRenderer renderer;
     private MasterInput input;
     private AudioSource AS;
+    [SerializeField]
+    private Destroyer d;
     private List<IBuildingRule> currentBuildingRules;
 
     public GameObject CurrentBuildingPrefab
@@ -25,11 +27,10 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         set { SelectPrefab(value); }
     }
 
-
     // Start is called before the first frame update
     void Awake()
     {
-        input = new MasterInput();
+        input = MasterInputProvider.input;
         ghost = GetComponent<BuildingGhost>();
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
@@ -60,15 +61,13 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
 
 
     private void FixedUpdate()
-    {
-        
+    {    
         if (currentBuildingRules != null)
         {
             ghost.IsValid = currentBuildingRules.All(x => x.IsRuleValid());
         }
         else
             ghost.IsValid = true;
-
     }
 
     private void OnEnable()
@@ -100,6 +99,9 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         meshCollider.sharedMesh = m;
         ghost.enabled = true;
         renderer.enabled = true;
+        ghost.moveable = true;
+        d.gameObject.SetActive(false);
+            
 
         currentBuildingRules = buildingPrefab.GetComponents<IBuildingRule>().ToList();
         currentBuildingRules.ForEach(x => x.Init(this));

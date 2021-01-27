@@ -33,3 +33,5 @@ MonoBehaviour:
     Time: 200
   - Budget: 4000
     Time: 200
+  - Budget: 100000
+    Time: 200
