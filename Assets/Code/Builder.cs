@@ -17,6 +17,8 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
     private new MeshRenderer renderer;
     private MasterInput input;
     private AudioSource AS;
+    [SerializeField]
+    private Destroyer d;
     private List<IBuildingRule> currentBuildingRules;
 
     public GameObject CurrentBuildingPrefab
@@ -98,6 +100,8 @@ public class Builder : MonoBehaviour //IMPROV: Make it a singleton? todo: talk a
         ghost.enabled = true;
         renderer.enabled = true;
         ghost.moveable = true;
+        d.gameObject.SetActive(false);
+            
 
         currentBuildingRules = buildingPrefab.GetComponents<IBuildingRule>().ToList();
         currentBuildingRules.ForEach(x => x.Init(this));
