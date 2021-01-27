@@ -21,9 +21,6 @@ public class EnemySpawner : MonoBehaviour
         get { return enemyListSC; }
     }
 
-    public float spawnCooldown = 60f;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -50,12 +47,12 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var wave in scenarioSC.Waves)
         {
-            var enemies = EnemyKnapsack.MakeVawe(wave,enemyListSC.Pricing);
+            var enemies = EnemyKnapsack.MakeVawe(wave.Budget,enemyListSC.Pricing);
             foreach (var enemy in enemies)
             {
                 Spawn(enemy.Key, enemy.Value);
             }
-            yield return new WaitForSeconds(spawnCooldown);
+            yield return new WaitForSeconds(wave.Time);
         }
     }
 }

@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d3b7cf87519e066b00b3a85a7d0f6f, type: 3}
   m_Name: Scenario
   m_EditorClassIdentifier: 
-  Waves: 64000000c80000002c010000f4010000e8030000d0070000b80b00008813000010270000983a0000
+  Waves:
+  - Budget: 0
+    Time: 30
+  - Budget: 100
+    Time: 60
+  - Budget: 200
+    Time: 60
+  - Budget: 300
+    Time: 60
+  - Budget: 600
+    Time: 60
+  - Budget: 1000
+    Time: 120
+  - Budget: 1500
+    Time: 200
+  - Budget: 180
+    Time: 180
+  - Budget: 2000
+    Time: 200
+  - Budget: 4000
+    Time: 200
