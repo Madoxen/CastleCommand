@@ -24,6 +24,9 @@ public class BuildingScreenSupplier : MonoBehaviour
     [SerializeField]
     private Builder builder; //reference to builder object
 
+    [SerializeField]
+    private Destroyer destroyer;
+
     private void Awake()
     {
         GenerateScreen();
@@ -56,6 +59,7 @@ public class BuildingScreenSupplier : MonoBehaviour
             b.onClick.AddListener(() =>
             {
                 builder.CurrentBuildingPrefab = prefab;
+                destroyer.gameObject.SetActive(false);
             });
 
             //Create Descriptor structs
