@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceCosts:
   - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
-    amount: 50
+    amount: 200
 --- !u!114 &3844082083974688680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 4985066418063663545, guid: f8ebf3633cbf7794cacf4c0b74832111,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.428
+      value: 2.184
       objectReference: {fileID: 0}
     - target: {fileID: 4985066418063663545, guid: f8ebf3633cbf7794cacf4c0b74832111,
         type: 3}

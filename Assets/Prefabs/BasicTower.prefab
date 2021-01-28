@@ -202,6 +202,7 @@ MonoBehaviour:
   Damage: 5
   arrowOrigin: {x: 0, y: 1, z: 0}
   projectileSpeed: 12
+  lastVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &8201309680920237664
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceCosts:
   - resource: {fileID: 11400000, guid: 51dcdc23226868840ae61d0286be2017, type: 2}
+    amount: 50
+  - resource: {fileID: 11400000, guid: 51fa033214ff5fa42b8948e58c7a138c, type: 2}
     amount: 50
 --- !u!1001 &7922658602582576896
 PrefabInstance:

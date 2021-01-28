@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea927b1669f148418297da96189ffee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Most basic line of defence. Shoots arrows at enemies dealing low damage.
+  description: Advanced tower, shoots bombs. Kaboom!
 --- !u!33 &4914209880496729384
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -533,8 +533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec56a67ac523b54e99e2328c04e1274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 200
-  maxHealth: 200
+  currentHealth: 400
+  maxHealth: 400
 --- !u!208 &1334563423353404280
 NavMeshObstacle:
   m_ObjectHideFlags: 0
