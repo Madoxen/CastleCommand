@@ -19,3 +19,5 @@ MonoBehaviour:
     Price: 50
   - Enemy: {fileID: 7066530043210357763, guid: bd34649fb34e60348ba83110132f6883, type: 3}
     Price: 150
+  - Enemy: {fileID: 8273158853032241537, guid: 84f1ebee61cd72948aeccf42e620cf58, type: 3}
+    Price: 100
