@@ -9,15 +9,13 @@ public class UnitAnimator : MonoBehaviour
     Animator animator;
     IDamageDealer dd;
     NavMeshAgent navAgent;
-
     Action<object> onAttack;
-
     
     // Use this for initialization
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        dd = GetComponent<IDamageDealer>();
+        dd = GetComponentInChildren<IDamageDealer>();
         navAgent = GetComponent<NavMeshAgent>();
 
         
