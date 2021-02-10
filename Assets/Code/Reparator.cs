@@ -83,6 +83,7 @@ public class Reparator : MonoBehaviour
     Renderer lastHitRenderer;
 
     Material lastMaterial;
+    [SerializeField]
     Material repairShader;
 
     MasterInput input;
@@ -98,7 +99,7 @@ public class Reparator : MonoBehaviour
 
         camera = Camera.main;
         buildingsLayer = LayerMask.GetMask("Buildings");
-        repairShader = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Yellow.4");
+
     }
 
     private void OnMouseMove()
@@ -110,7 +111,7 @@ public class Reparator : MonoBehaviour
             //building gets collored to show it is aimed at
             var hitObject = hit.collider.gameObject;
 
-            if (hitObject != lastHit)
+            if (hitObject != lastHit && hitObject.GetComponent<HealthComponent>() != null)
             {
                 if (lastHit != null)
                     lastHit = null;
