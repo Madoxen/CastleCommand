@@ -25,6 +25,7 @@ public class Destroyer : MonoBehaviour
 
     GameObject lastHit;
     Material lastMaterial;
+    [SerializeField]
     Material destroyShader;
 
     MasterInput input;
@@ -39,7 +40,6 @@ public class Destroyer : MonoBehaviour
 
         camera = Camera.main;
         buildingsLayer = LayerMask.GetMask("Buildings");
-        destroyShader = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Purple.2");
     }
 
     private void OnMouseMove()
