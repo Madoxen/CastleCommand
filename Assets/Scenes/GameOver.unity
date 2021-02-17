@@ -374,7 +374,7 @@ RectTransform:
   m_GameObject: {fileID: 625817203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.775, y: 1.6626, z: 1}
   m_Children:
   - {fileID: 1830930656}
   - {fileID: 1620487801}
@@ -383,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10.2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 17.631}
+  m_SizeDelta: {x: 246.77805, y: 38.938408}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625817205
 MonoBehaviour:
@@ -631,7 +631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &752993388
 RectTransform:
   m_ObjectHideFlags: 0
@@ -686,6 +686,7 @@ MonoBehaviour:
   mainUI: {fileID: 1923747746}
   saveScoreUI: {fileID: 752993387}
   saveScoreButton: {fileID: 686383700}
+  nameInput: {fileID: 625817205}
 --- !u!4 &776285446
 Transform:
   m_ObjectHideFlags: 0
@@ -1622,7 +1623,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -1833,10 +1834,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2081,7 +2082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1923747747
 RectTransform:
   m_ObjectHideFlags: 0
