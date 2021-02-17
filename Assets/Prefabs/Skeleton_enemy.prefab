@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Skeleton Dark
+  points: 1
 --- !u!114 &2072764779204157784
 MonoBehaviour:
   m_ObjectHideFlags: 0

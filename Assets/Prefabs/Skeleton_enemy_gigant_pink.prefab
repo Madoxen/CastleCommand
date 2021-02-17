@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: enemyName
       value: Skeleton Pink Gigant
       objectReference: {fileID: 0}
+    - target: {fileID: 4488267666926863365, guid: 5a71ff0739e453d419bb43dc842aa233,
+        type: 3}
+      propertyPath: points
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5427670615526855142, guid: 5a71ff0739e453d419bb43dc842aa233,
         type: 3}
       propertyPath: m_LocalPosition.x
