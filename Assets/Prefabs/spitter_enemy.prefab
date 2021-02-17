@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Enemy!
+  points: 5
 --- !u!114 &2059069762975491382
 MonoBehaviour:
   m_ObjectHideFlags: 0
