@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject menuCanvas;
+    private GameObject menu;
     [SerializeField]
-    private GameObject guideCanvas;
+    private GameObject guide;
+    [SerializeField]
+    private GameObject leaderboard;
     [SerializeField]
     private List<Sprite> guidePages;
     [SerializeField]
@@ -57,8 +59,15 @@ public class MainMenu : MonoBehaviour
     public void ShowGuide()
     {
         Debug.Log("Showing the guide");
-        guideCanvas.SetActive(true);
-        menuCanvas.SetActive(false);
+        guide.SetActive(true);
+        menu.SetActive(false);
+    }
+
+    public void ShowLeaderboard()
+    {
+        Debug.Log("Showing the leaderboard");
+        leaderboard.SetActive(true);
+        menu.SetActive(false);
     }
 
     public void GuideNextPage()
@@ -75,8 +84,8 @@ public class MainMenu : MonoBehaviour
     {
         currentGuidePage = 0;
         Debug.Log("Showing the menu");
-        menuCanvas.SetActive(true);
-        guideCanvas.SetActive(false);
+        menu.SetActive(true);
+        guide.SetActive(false);
     }
     public void Quit()
     {
