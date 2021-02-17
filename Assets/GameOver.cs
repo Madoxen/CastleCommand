@@ -50,6 +50,6 @@ public class GameOver : MonoBehaviour
 
     private void submitScore(string name)
     {
-        Debug.Log($"Submitting {name}'s score.");
+        PlayerPoints.AddHighscoreEntry((int) PlayerPoints.Value, name);
     }
 }

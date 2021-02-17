@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -41,6 +42,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void Quit()
     {
-
+        SceneManager.LoadScene("GameOver");
     }
 }
